@@ -13,12 +13,11 @@ require('telescope').setup {
             horizontal = { width_padding = 0.05, height_padding = 0.1, preview_width = 0.6 },
 
             prompt_position = "bottom"
-        }
+        },
+
+        file_ignore_patterns = { "node_modules", "target", ".git", ".vscode" }
     },
-
-    extensions = { fzy_native = { override_generic_sorter = false, override_file_sorter = true } },
-
-    fzf_writer = { use_highlighter = false, minimum_grep_characters = 6 }
+    extensions = { fzy_native = { override_generic_sorter = false, override_file_sorter = true } }
 }
 
 require('telescope').load_extension('fzy_native')
@@ -30,29 +29,6 @@ function M.files_config_nvim()
         prompt_title = "~ NVIM dotfiles ~",
         shorten_path = false,
         cwd = vim.fn.stdpath('config')
-    }
-end
-
-function M.find_files()
-    require('telescope.builtin').find_files {
-        -- path_display = { "shorten" },
-        previewer = false,
-        file_ignore_patterns = { "target/.*" }
-    }
-end
-
-function M.find_files_with_preview()
-    require('telescope.builtin').find_files {
-        -- path_display = { "shorten" },
-        file_ignore_patterns = { "target/.*" }
-    }
-end
-
-function M.live_grep()
-    require('telescope').extensions.fzf_writer.staged_grep {
-        -- path_display = { "shorten" },
-        previewer = false,
-        fzf_separator = "|>"
     }
 end
 
