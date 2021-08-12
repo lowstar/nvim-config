@@ -30,22 +30,18 @@ map('n', '<leader>sv', ':luafile $MYVIMRC<cr>', { noremap = true, silent = true 
 
 -- Telescope
 
-map('n', '<leader>ff', "<cmd>lua require('mv.telescope').find_files()<cr>",
-    { noremap = true, silent = true })
-
-map('n', '<C-p>', "<cmd>lua require('mv.telescope').find_files_with_preview()<cr>",
+map('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>",
     { noremap = true, silent = true })
 
 map('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>",
     { noremap = true, silent = true })
 
-map('n', '<leader>fg', "<cmd>lua require('mv.telescope').live_grep()<cr>",
+map('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>",
     { noremap = true, silent = true })
 
 map('n', '<leader>fv', "<cmd>lua require('mv.telescope').files_config_nvim()<cr>",
     { noremap = true, silent = true })
 
-map('n', '<leader>fq', ":Telescope quickfix<cr>", { noremap = true, silent = true })
 -- Hop
 map('n', '<leader>j', "<cmd>lua require'hop'.hint_words()<cr>", { noremap = true, silent = true })
 map('n', '<leader>J', "<cmd>lua require'hop'.hint_char1()<cr>", { noremap = true, silent = true })
