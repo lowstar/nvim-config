@@ -1,0 +1,40 @@
+local lspconfig = require 'lspconfig'
+
+local bufdir = vim.fn.expand('%:p:h')
+
+local sumneko_root_path = vim.fn.expand('$HOME') .. '/devel/lua-language-server'
+local sumneko_binary = sumneko_root_path .. '/bin/macOS/lua-language-server'
+
+lspconfig.sumneko_lua.setup {
+    cmd = { sumneko_binary, '-E', sumneko_root_path .. '/main.lua' },
+    settings = {
+        documentFormatting = false,
+        Lua = {
+            runtime = { version = 'LuaJIT', path = vim.split(package.path, ';') },
+            diagnostics = { globals = { 'vim' } },
+            workspace = {
+                library = {
+                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
+                }
+            }
+        }
+    },
+    on_attach = require'mv.lsp'.common_on_attach
+}
+
+lspconfig.pyright.setup { on_attach = require'mv.lsp'.common_on_attach }
+
+lspconfig.vimls.setup { on_attach = require'mv.lsp'.common_on_attach }
+
+lspconfig.tsserver.setup {
+    settings = { documentFormatting = false },
+    on_attach = require'mv.lsp'.common_on_attach
+}
+
+lspconfig.clangd.setup {
+    cmd = { "clangd", "--background-index", "--query-driver=**/arm-none-eabi*" },
+    root_dir = lspconfig.util.root_pattern("compile_commands.json") or bufdir,
+    on_attach = require'mv.lsp'.common_on_attach
+}
+
