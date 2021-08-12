@@ -87,13 +87,15 @@ function M.common_on_attach(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ln', '<cmd>lua vim.lsp.buf.rename()<cr>',
                                 { noremap = true, silent = true })
 
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf', "<cmd>lua vim.lsp.buf.formatting()<cr>",
-                                { noremap = true, silent = true })
-    -- if client.resolved_capabilities.document_formatting then
-    --     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf', "<cmd>lua vim.lsp.buf.formatting()<cr>", {noremap = true, silent = true})
-    -- elseif client.resolved_capabilities.document_range_formatting then
-    --     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf', "<cmr>lua vim.lsp.buf.range_formatting()<cr>", {noremap = true, silent = true})
-    -- end
+    if client.resolved_capabilities.document_formatting then
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf',
+                                    "<cmd>lua vim.lsp.buf.formatting()<cr>",
+                                    { noremap = true, silent = true })
+    elseif client.resolved_capabilities.document_range_formatting then
+        vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>lf',
+                                    "<cmr>lua vim.lsp.buf.range_formatting()<cr>",
+                                    { noremap = true, silent = true })
+    end
 
     vim.cmd [[
         augroup lsp_codeaction_lightbulb
