@@ -28,7 +28,10 @@ lspconfig.pyright.setup { on_attach = require'mv.lsp'.common_on_attach }
 lspconfig.vimls.setup { on_attach = require'mv.lsp'.common_on_attach }
 
 lspconfig.tsserver.setup {
-    settings = { documentFormatting = false },
+    on_init = function(client)
+        client.resolved_capabilities.document_formatting = false
+        client.resolved_capabilities.document_range_formatting = false
+    end,
     on_attach = require'mv.lsp'.common_on_attach
 }
 
