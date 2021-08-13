@@ -7,12 +7,7 @@ end
 
 vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile'
 
-require('packer').init {
-    display = {
-        open_fn = 'new [packer]'
-        -- open_fn = require('packer.util').float
-    }
-}
+require('packer').init { display = { open_fn = 'new [packer]' } }
 
 return require('packer').startup(function(use)
     use 'wbthomason/packer.nvim'
@@ -20,7 +15,6 @@ return require('packer').startup(function(use)
     use 'nanotee/nvim-lua-guide'
 
     use 'chriskempson/base16-vim'
-    -- use 'arcticicestudio/nord-vim'
     use 'itchyny/lightline.vim'
     use 'machakann/vim-highlightedyank'
 
@@ -65,8 +59,6 @@ return require('packer').startup(function(use)
     use 'tpope/vim-surround'
     use 'windwp/nvim-autopairs'
     use 'tommcdo/vim-exchange'
-    -- use 'terrortylor/nvim-comment'
-    -- use 'mhinz/vim-startify'
 
     use 'simrat39/rust-tools.nvim'
     use 'mfussenegger/nvim-dap'
