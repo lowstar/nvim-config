@@ -32,7 +32,8 @@ endfunction
 
 vim.api.nvim_exec([[
 function! Lightline_Filename()
-  let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+  "let filename = expand('%:t') !=# '' ? expand('%:t') : '[No Name]'
+  let filename = expand('%:t') !=# '' ? @% : '[No Name]'
   let modified = &modified ? ' +' : ''
   return filename . modified
 endfunction
