@@ -13,7 +13,11 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 require('rust-tools').setup({
     tools = tools,
     server = {
-        on_attach = require'mv.lsp'.common_on_attach,
+        on_attach = function(client, bufnr)
+            require'mv.lsp'.common_on_attach(client, bufnr)
+            vim.api.nvim_buf_set_keymap(bufnr, 'v', 'K', ":<C-U>RustHoverRange<cr>",
+                                        { noremap = true, silent = true })
+        end,
         capabilities = capabilities,
         settings = {
             ["rust-analyzer"] = {
