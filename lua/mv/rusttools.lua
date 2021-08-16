@@ -1,11 +1,4 @@
-local tools = {
-    inlay_hints = {
-        highlight = "InlayHint"
-    },
-    hover_actions = {
-        auto_focus = true
-    }
-}
+local tools = { inlay_hints = { highlight = "InlayHint" }, hover_actions = { auto_focus = true } }
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -21,22 +14,10 @@ require('rust-tools').setup({
         capabilities = capabilities,
         settings = {
             ["rust-analyzer"] = {
-                assist = {
-                    importMergeBehavior = "last",
-                    importPrefix = "by_self",
-                },
-                lens = {
-                    enable = true,
-                    methodReferences = true,
-                    references = true
-                },
-                cargo = {
-                    loadOutDirsFromCheck = true
-                },
-                procMacro = {
-                    enable = true
-                }
+                assist = { importMergeBehavior = "last", importPrefix = "by_self" },
+                cargo = { loadOutDirsFromCheck = true },
+                procMacro = { enable = true }
             }
-        },
+        }
     }
 })
