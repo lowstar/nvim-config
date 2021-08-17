@@ -42,6 +42,8 @@ map('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>",
 map('n', '<leader>fv', "<cmd>lua require('mv.telescope').files_config_nvim()<cr>",
     { noremap = true, silent = true })
 
+map('n', '<leader>fq', "<cmd>lua require('telescope.builtin').quickfix()<cr>",
+    { noremap = true, silent = true })
 -- Hop
 map('n', '<leader>j', "<cmd>lua require'hop'.hint_words()<cr>", { noremap = true, silent = true })
 map('n', '<leader>J', "<cmd>lua require'hop'.hint_char1()<cr>", { noremap = true, silent = true })
