@@ -28,7 +28,6 @@ return require('packer').startup(function(use)
     use 'ryanoasis/vim-devicons'
     use 'kyazdani42/nvim-web-devicons'
     use 'kyazdani42/nvim-tree.lua'
-    -- use 'romgrk/barbar.nvim'
 
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
