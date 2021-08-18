@@ -1,10 +1,7 @@
 vim.api.nvim_exec([[
 function! Lightline_LspClient()
     let lspclient = luaeval("require'mv.lsp'.get_lsp_client()")
-    if strlen(lspclient) > 0
-        return ' ' .. lspclient
-    endif
-    return  ''
+    return lspclient
 endfunction
 ]], false)
 
