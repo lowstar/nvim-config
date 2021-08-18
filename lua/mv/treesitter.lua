@@ -1,5 +1,25 @@
 require'nvim-treesitter.configs'.setup {
-    ensure_installed = "maintained",
+    ensure_installed = {
+        "bash",
+        "cmake",
+        "cpp",
+        "css",
+        "devicetree",
+        "dockerfile",
+        "html",
+        "java",
+        "javascript",
+        "json",
+        "lua",
+        "python",
+        "regex",
+        "rust",
+        "toml",
+        "tsx",
+        "typescript",
+        "vim",
+        "yaml"
+    },
     highlight = {
         enable = true -- false will disable the whole extension
     },
