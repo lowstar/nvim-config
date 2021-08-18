@@ -33,7 +33,13 @@ return require('packer').startup(function(use)
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
     use 'nvim-telescope/telescope.nvim'
-    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
+    if vim.fn.has('bsd') then
+        use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'gmake' }
+    else
+        use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    end
+
     use 'nvim-telescope/telescope-symbols.nvim'
     use 'nvim-telescope/telescope-hop.nvim'
 
