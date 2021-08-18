@@ -29,12 +29,12 @@ require'nvim-treesitter.configs'.setup {
             init_selection = "<M-w>",
             node_incremental = "<M-w>",
             scope_incremental = "<M-e>",
-            node_decremental = "<M-C-w>",
+            node_decremental = "<M-C-w>"
             -- init_selection = "gnn",
             -- node_incremental = "grn",
             -- scope_incremental = "grc",
             -- node_decremental = "grm",
-        },
+        }
     },
     indent = { enable = true },
     context_commentstring = { enable = true },
@@ -60,9 +60,9 @@ require'nvim-treesitter.configs'.setup {
                 list_definitions = "gnD",
                 list_definitions_toc = "gO",
                 goto_next_usage = "<a-*>",
-                goto_previous_usage = "<a-#>",
-            },
-        },
+                goto_previous_usage = "<a-#>"
+            }
+        }
     }
 }
 
