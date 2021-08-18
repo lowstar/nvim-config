@@ -15,7 +15,6 @@ return require('packer').startup(function(use)
     use 'nanotee/nvim-lua-guide'
 
     use 'chriskempson/base16-vim'
-    use 'itchyny/lightline.vim'
     use 'machakann/vim-highlightedyank'
 
     use {
@@ -28,6 +27,8 @@ return require('packer').startup(function(use)
     use 'ryanoasis/vim-devicons'
     use 'kyazdani42/nvim-web-devicons'
     use 'kyazdani42/nvim-tree.lua'
+
+    use { 'hoob3rt/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
 
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
