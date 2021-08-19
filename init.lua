@@ -7,7 +7,6 @@ require('mv.trimwhite')
 require('mv.lualine')
 require('mv.telescope')
 require('mv.compe')
-require('mv.lspkind')
 require('mv.nvim-tree')
 require('mv.nvim-autopairs')
 
