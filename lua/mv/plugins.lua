@@ -44,7 +44,12 @@ return require('packer').startup(function(use)
     use 'nvim-telescope/telescope-hop.nvim'
 
     use 'neovim/nvim-lspconfig'
-    use { 'onsails/lspkind-nvim', config = require'lspkind'.init }
+    use {
+        'onsails/lspkind-nvim',
+        config = function()
+            require'lspkind'.init()
+        end
+    }
     use 'nvim-lua/lsp_extensions.nvim'
     use 'glepnir/lspsaga.nvim'
     use 'wbthomason/lsp-status.nvim'
