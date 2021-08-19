@@ -63,7 +63,10 @@ return require('packer').startup(function(use)
     use 'windwp/nvim-ts-autotag'
 
     use 'hrsh7th/nvim-compe'
-    use 'hrsh7th/vim-vsnip'
+
+    -- use 'hrsh7th/vim-vsnip'
+    -- use 'hrsh7th/vim-vsnip-integ'
+    -- use "rafamadriz/friendly-snippets"
 
     use 'airblade/vim-gitgutter'
     use 'tpope/vim-fugitive'
