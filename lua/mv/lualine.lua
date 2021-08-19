@@ -50,8 +50,8 @@ local tomorrow_night = {
     }
 }
 
-local function lsp_client()
-    return require'mv.lsp'.get_lsp_client()
+local my_fileformat = function()
+    return vim.bo.fileformat
 end
 
 require'lualine'.setup({
@@ -64,7 +64,7 @@ require'lualine'.setup({
         lualine_a = { 'mode' },
         lualine_b = { 'branch', 'diff', { 'diagnostics', sources = { 'nvim_lsp' } } },
         lualine_c = { { 'filename', path = 1 } },
-        lualine_x = { lsp_client, 'fileformat', 'encoding', 'filetype' },
+        lualine_x = { require'mv.lsp'.get_lsp_client, my_fileformat, 'encoding', 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' }
     },
@@ -72,7 +72,7 @@ require'lualine'.setup({
         lualine_a = { 'mode' },
         lualine_b = { 'branch', 'diff', { 'diagnostics', sources = { 'nvim_lsp' } } },
         lualine_c = { { 'filename', path = 1 } },
-        lualine_x = { lsp_client, 'fileformat', 'encoding', 'filetype' },
+        lualine_x = { require'mv.lsp'.get_lsp_client, my_fileformat, 'encoding', 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' }
     },
