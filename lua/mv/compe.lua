@@ -5,7 +5,8 @@ require'compe'.setup {
         calc = true,
         nvim_lsp = true,
         nvim_lua = true,
-        treesitter = true
+        treesitter = true,
+        vsnip = true
     }
 }
 
