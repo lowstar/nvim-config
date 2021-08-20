@@ -1,4 +1,6 @@
-require'nvim-treesitter.configs'.setup {
+local ensure_installed = {}
+
+if vim.fn.hostname() == "prime" then
     ensure_installed = {
         "bash",
         "cmake",
@@ -18,7 +20,25 @@ require'nvim-treesitter.configs'.setup {
         "typescript",
         "vim",
         "yaml"
-    },
+    }
+else
+    ensure_installed = {
+        "bash",
+        "cpp",
+        "javascript",
+        "json",
+        "lua",
+        "python",
+        "regex",
+        "rust",
+        "toml",
+        "vim",
+        "yaml"
+    }
+end
+
+require'nvim-treesitter.configs'.setup {
+    ensure_installed = ensure_installed,
     highlight = {
         enable = true -- false will disable the whole extension
     },
