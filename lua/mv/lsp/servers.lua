@@ -41,3 +41,24 @@ lspconfig.clangd.setup {
     on_attach = require'mv.lsp'.common_on_attach
 }
 
+if vim.fn.hostname() == "prime" then
+    -- Enable (broadcasting) snippet capability for completion
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+    require'lspconfig'.html.setup {
+        capabilities = capabilities,
+        on_attach = require'mv.lsp'.common_on_attach
+    }
+
+    require'lspconfig'.jsonls.setup {
+        commands = {
+            Format = {
+                function()
+                    vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
+                end
+            }
+        },
+        on_attach = require'mv.lsp'.common_on_attach
+    }
+end
