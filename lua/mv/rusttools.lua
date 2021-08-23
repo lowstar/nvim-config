@@ -1,6 +1,3 @@
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-
 require('rust-tools').setup({
     tools = {
         inlay_hints = {
@@ -16,7 +13,6 @@ require('rust-tools').setup({
             vim.api.nvim_buf_set_keymap(bufnr, 'v', 'K', ":<C-U>RustHoverRange<cr>",
                                         { noremap = true, silent = true })
         end,
-        capabilities = capabilities,
         settings = {
             ["rust-analyzer"] = {
                 assist = { importMergeBehavior = "last", importPrefix = "by_self" },
