@@ -95,5 +95,7 @@ return require('packer').startup(function(use)
                 require'colorizer'.setup({ 'css', 'javascript', html = { mode = 'foreground' } })
             end
         }
+
+        use { 'mhinz/vim-startify' }
     end
 end)
