@@ -44,7 +44,9 @@ function M.common_on_attach(client, bufnr)
                                 { noremap = true, silent = true })
 
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', ":Telescope lsp_code_actions<cr>", {noremap = true, silent = true})
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', ":Lspsaga code_action<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>1', ":Lspsaga code_action<cr>",
+                                { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>1', ":<C-U>Lspsaga range_code_action<cr>",
                                 { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dp',
                                 "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
