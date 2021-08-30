@@ -88,14 +88,12 @@ return require('packer').startup(function(use)
         end
     }
 
-    if vim.fn.hostname() == "prime" then
-        use {
-            'norcalli/nvim-colorizer.lua',
-            config = function()
-                require'colorizer'.setup({ 'css', 'javascript', html = { mode = 'foreground' } })
-            end
-        }
+    use {
+        'norcalli/nvim-colorizer.lua',
+        config = function()
+            require'colorizer'.setup({ 'css', 'javascript', html = { mode = 'foreground' } })
+        end
+    }
 
-        use { 'mhinz/vim-startify' }
-    end
+    use { 'mhinz/vim-startify' }
 end)
