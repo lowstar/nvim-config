@@ -1,39 +1,24 @@
-local highlight = require('mv.vim').highlight
-local highlight_link = require('mv.vim').highlight_link
-
 function _G.tweak_colors()
-    highlight_link('FloatBorder', 'NormalFloat')
-    highlight_link('ExtraWhiteSpace', 'ErrorMsg')
+    vim.cmd('highlight! link FloatBorder NormalFloat')
+    vim.cmd('highlight! link ExtraWhiteSpace ErrorMsg')
 
     if vim.g.colors_name:find("^base16") ~= nil then
-        highlight('NonText', { guifg = '#' .. vim.g.base16_gui02, ctermfg = vim.g.base16_cterm03 })
-        highlight("LspDiagnosticsDefaultError",
-                  { guifg = '#' .. vim.g.base16_gui08, ctermfg = vim.g.base16_cterm03 })
-        highlight("LspDiagnosticsDefaultWarning",
-                  { guifg = '#' .. vim.g.base16_gui09, ctermfg = vim.g.base16_cterm05 })
-        highlight("LspReferenceRead",
-                  { guibg = '#' .. vim.g.base16_gui01, ctermbg = vim.g.base16_cterm02 })
-        highlight("LspReferenceText",
-                  { guibg = '#' .. vim.g.base16_gui01, ctermbg = vim.g.base16_cterm02 })
-        highlight("LspReferenceWrite",
-                  { guibg = '#' .. vim.g.base16_gui01, ctermbg = vim.g.base16_cterm02 })
-        highlight("LspDiagnosticsUnderlineError", {
-            guifg = '#' .. vim.g.base16_gui08,
-            ctermfg = vim.g.base16_cterm03,
-            cterm = "undercurl",
-            gui = "undercurl"
-        })
-        highlight("LspDiagnosticsUnderlineWarning", {
-            guifg = '#' .. vim.g.base16_gui09,
-            ctermfg = vim.g.base16_cterm05,
-            cterm = "undercurl",
-            gui = "undercurl"
-        })
-        highlight("HopNextKey", { guifg = '#' .. vim.g.base16_gui0C })
-        highlight("HopNextKey1", { guifg = '#' .. vim.g.base16_gui0C })
-        highlight("HopNextKey2", { guifg = '#' .. vim.g.base16_gui0D })
-        highlight("HopUnmatched", { guifg = '#' .. vim.g.base16_gui02 })
-        highlight("InlayHint", { guifg = '#' .. vim.g.base16_gui0C, gui = "italic" })
+        vim.fn.Base16hi('InlayHint', vim.g.base16_gui0C, '', '', '', '', '')
+        vim.fn.Base16hi('HopNextKey', vim.g.base16_gui0C, '', '', '', '', '')
+        vim.fn.Base16hi('HopNextKey1', vim.g.base16_gui0C, '', '', '', '', '')
+        vim.fn.Base16hi('HopNextKey2', vim.g.base16_gui0D, '', '', '', '', '')
+        vim.fn.Base16hi('HopUnmatched', vim.g.base16_gui02, '', '', '', '', '')
+        vim.fn.Base16hi('InlayHint', vim.g.base16_gui0C, '', '', '', 'italic', '')
+
+        vim.fn.Base16hi("LspDiagnosticsDefaultError", vim.g.base16_gui08, '', '', '', '', '')
+        vim.fn.Base16hi("LspDiagnosticsDefaultWarning", vim.g.base16_gui09, '', '', '', '', '')
+        vim.fn.Base16hi("LspReferenceRead", vim.g.base16_gui01, '', '', '', '', '')
+        vim.fn.Base16hi("LspReferenceText", vim.g.base16_gui01, '', '', '', '', '')
+        vim.fn.Base16hi("LspReferenceWrite", vim.g.base16_gui01, '', '', '', '', '')
+        vim.fn.Base16hi("LspDiagnosticsUnderlineError", vim.g.base16_gui08, '', '', '', '',
+                        'undercurl')
+        vim.fn.Base16hi("LspDiagnosticsUnderlineWarning", vim.g.base16_gui09, '', '', '', "",
+                        'undercurl')
     end
 
     require'nvim-web-devicons'.setup { default = true }
