@@ -3,13 +3,13 @@ function _G.tweak_colors()
     vim.cmd('highlight! link ExtraWhiteSpace ErrorMsg')
 
     if vim.g.colors_name:find("^base16") ~= nil then
+        vim.fn.Base16hi('NonText', vim.g.base16_gui02, '', vim.g.base16_cterm03, '', '', '')
         vim.fn.Base16hi('InlayHint', vim.g.base16_gui0C, '', '', '', '', '')
         vim.fn.Base16hi('HopNextKey', vim.g.base16_gui0C, '', '', '', '', '')
         vim.fn.Base16hi('HopNextKey1', vim.g.base16_gui0C, '', '', '', '', '')
         vim.fn.Base16hi('HopNextKey2', vim.g.base16_gui0D, '', '', '', '', '')
         vim.fn.Base16hi('HopUnmatched', vim.g.base16_gui02, '', '', '', '', '')
         vim.fn.Base16hi('InlayHint', vim.g.base16_gui0C, '', '', '', 'italic', '')
-
         vim.fn.Base16hi("LspDiagnosticsDefaultError", vim.g.base16_gui08, '', '', '', '', '')
         vim.fn.Base16hi("LspDiagnosticsDefaultWarning", vim.g.base16_gui09, '', '', '', '', '')
         vim.fn.Base16hi("LspReferenceRead", vim.g.base16_gui01, '', '', '', '', '')
