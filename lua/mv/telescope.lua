@@ -1,4 +1,4 @@
-local actions = require('telescope.actions')
+local actions = require("telescope.actions")
 
 require('telescope').setup {
     defaults = {
@@ -7,7 +7,7 @@ require('telescope').setup {
 
         mappings = {
             i = {
-                ["<esc>"] = actions.close,
+                -- ["<esc>"] = actions.close,
                 ["<C-h>"] = require"telescope".extensions.hop.hop,
                 ["<C-space>"] = function(prompt_bufnr)
                     local opts = {
@@ -20,12 +20,30 @@ require('telescope').setup {
         },
 
         layout_config = {
-            horizontal = { width_padding = 0.05, height_padding = 0.1, preview_width = 0.6 },
+            width = 0.95,
+            height = 0.85,
+            prompt_position = "top",
 
-            prompt_position = "bottom"
+            horizontal = {
+                -- width_padding = 0.1,
+                -- height_padding = 0.1,
+                preview_width = function(_, cols, _)
+                    if cols > 200 then
+                        return math.floor(cols * 0.4)
+                    else
+                        return math.floor(cols * 0.6)
+                    end
+                end
+            }
         },
 
         file_ignore_patterns = { "node_modules", "target", ".git", ".vscode" }
+    },
+    pickers = {
+        find_files = { theme = "ivy" },
+        file_browser = { theme = "ivy" }
+        -- buffers = { theme = "ivy" },
+        -- live_grep = { theme = "ivy" }
     },
     extensions = {
         fzf = {
