@@ -36,6 +36,8 @@ vim.fn.sign_define("LightBulbSign", { text = "", texthl = "LspDiagnosticsSign
 local M = {}
 
 function M.common_on_attach(client, bufnr)
+    require'mv.lsp.status'.on_attach(client)
+
     vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
     -- vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
