@@ -51,7 +51,7 @@ return require('packer').startup(function(use)
     }
     use 'nvim-lua/lsp_extensions.nvim'
     use 'glepnir/lspsaga.nvim'
-    use 'wbthomason/lsp-status.nvim'
+    use 'nvim-lua/lsp-status.nvim'
     use 'kosayoda/nvim-lightbulb'
 
     use 'nvim-treesitter/nvim-treesitter'
