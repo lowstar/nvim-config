@@ -4,11 +4,8 @@ vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.s
                                                               { border = "single" })
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] =
-    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-        virtual_text = { prefix = '»', spacing = 4 },
-        update_in_insert = false,
-        severity_sort = true
-    })
+    vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics,
+                 { virtual_text = true, update_in_insert = false, severity_sort = true })
 
 vim.fn.sign_define("LspDiagnosticsSignError", {
     texthl = "LspDiagnosticsSignError",
@@ -36,10 +33,9 @@ vim.fn.sign_define("LightBulbSign", { text = "", texthl = "LspDiagnosticsSign
 local M = {}
 
 function M.common_on_attach(client, bufnr)
-    require'mv.lsp.status'.on_attach(client)
+    require'lsp-status'.on_attach(client)
 
-    vim.bo.omnifunc = "v:lua.vim.lsp.omnifunc"
-    -- vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+    vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     vim.api.nvim_buf_set_keymap(bufnr, 'i', '<C-k>', "<cmd>lua vim.lsp.buf.signature_help()<cr>",
                                 { noremap = true, silent = true })
@@ -48,7 +44,6 @@ function M.common_on_attach(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', "<cmd>lua vim.lsp.buf.hover()<cr>",
                                 { noremap = true, silent = true })
 
-    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', ":Telescope lsp_code_actions<cr>", {noremap = true, silent = true})
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>1', ":Lspsaga code_action<cr>",
                                 { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>1', ":<C-U>Lspsaga range_code_action<cr>",
@@ -73,7 +68,6 @@ function M.common_on_attach(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gI',
                                 "<cmd>lua require'mv.telescope'.lsp_implementations()<cr>",
                                 { noremap = true, silent = true })
-    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lr', "<cmd>lua require'mv.lsp.codelens'.run()<cr>", {noremap = true, silent = true})
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lr', "<cmd>lua vim.lsp.codelens.run()<cr>",
                                 { noremap = true, silent = true })
 
@@ -88,7 +82,6 @@ function M.common_on_attach(client, bufnr)
                                 { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ld', ":Lspsaga show_line_diagnostics<cr>",
                                 { noremap = true, silent = true })
-    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ld', "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<cr>", {noremap = true, silent = true})
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ln', '<cmd>lua vim.lsp.buf.rename()<cr>',
                                 { noremap = true, silent = true })
 
@@ -157,6 +150,8 @@ function M.get_lsp_client()
 end
 
 vim.lsp.set_log_level(4)
+
+require('mv.lsp.status').setup()
 
 return M
 

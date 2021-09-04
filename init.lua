@@ -13,7 +13,6 @@ require('mv.nvim-autopairs')
 require('mv.treesitter')
 require('mv.lsp')
 require('mv.lsp.servers')
-require('mv.lsp.status').activate()
 require('mv.lsp.efm')
 require('mv.lspsaga')
 
