@@ -3,7 +3,6 @@ require('mv.plugins')
 
 require('mv.mappings')
 require('mv.telescope')
-require('mv.nvim-tree')
 
 require('mv.treesitter')
 require('mv.lsp')
