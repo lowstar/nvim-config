@@ -2,7 +2,6 @@ require('mv.options')
 require('mv.plugins')
 
 require('mv.mappings')
-require('mv.trimwhite')
 require('mv.telescope')
 require('mv.nvim-tree')
 
