@@ -8,7 +8,6 @@ require('mv.treesitter')
 require('mv.lsp')
 require('mv.lsp.servers')
 require('mv.lsp.efm')
-require('mv.lspsaga')
 
 require('mv.dap')
 require('mv.dap.lldb')
