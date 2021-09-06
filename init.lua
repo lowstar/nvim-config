@@ -6,7 +6,7 @@ require('mv.colorscheme')
 require('mv.trimwhite')
 require('mv.lualine')
 require('mv.telescope')
-require('mv.compe')
+require('mv.cmp')
 require('mv.nvim-tree')
 require('mv.nvim-autopairs')
 

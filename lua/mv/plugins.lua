@@ -61,11 +61,17 @@ return require('packer').startup(function(use)
     use 'JoosepAlviste/nvim-ts-context-commentstring'
     use 'windwp/nvim-ts-autotag'
 
-    use 'hrsh7th/nvim-compe'
-
-    use 'hrsh7th/vim-vsnip'
-    -- use 'hrsh7th/vim-vsnip-integ'
-    -- use "rafamadriz/friendly-snippets"
+    use {
+        "hrsh7th/nvim-cmp",
+        requires = {
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lua",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "L3MON4D3/LuaSnip",
+            "saadparwaiz1/cmp_luasnip"
+        }
+    }
 
     use 'airblade/vim-gitgutter'
     use 'tpope/vim-fugitive'
