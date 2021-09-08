@@ -28,7 +28,11 @@ vim.fn.sign_define("LspDiagnosticsSignHint", {
     numhl = "LspDiagnosticsSignHint"
 })
 
-vim.fn.sign_define("LightBulbSign", { text = "", texthl = "LspDiagnosticsSignInformation" })
+vim.fn.sign_define("LightBulbSign", {
+    text = "",
+    texthl = "LspDiagnosticsSignInformation",
+    numhl = "LspDiagnosticsSignInformation"
+})
 
 local M = {}
 
