@@ -41,8 +41,14 @@ require('telescope').setup {
     },
     pickers = {
         find_files = { theme = "ivy" },
-        file_browser = { theme = "ivy" }
-        -- buffers = { theme = "ivy" },
+        file_browser = { theme = "ivy" },
+        buffers = {
+            mappings = {
+                i = { ["<c-d>"] = require("telescope.actions").delete_buffer },
+                n = { ["<c-d>"] = require("telescope.actions").delete_buffer }
+            }
+            -- theme = "ivy"
+        }
         -- live_grep = { theme = "ivy" }
     },
     extensions = {
