@@ -7,7 +7,7 @@ require('telescope').setup {
 
         mappings = {
             i = {
-                -- ["<esc>"] = actions.close,
+                ["<esc>"] = actions.close,
                 ["<C-h>"] = require"telescope".extensions.hop.hop,
                 ["<C-space>"] = function(prompt_bufnr)
                     local opts = {
