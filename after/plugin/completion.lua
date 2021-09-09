@@ -66,11 +66,16 @@ cmp.setup {
     },
 
     sources = {
-        { name = 'path' },
         { name = 'nvim_lua' },
         { name = 'nvim_lsp' },
         { name = 'buffer' },
+        { name = 'path' },
         { name = 'luasnip' }
-    }
+    },
+
+    documentation = { border = 'rounded' },
+
+    experimental = { ghost_text = false }
+
 }
 
