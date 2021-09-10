@@ -107,7 +107,8 @@ end
 
 require'lualine'.setup({
     options = {
-        theme = tomorrow_night,
+        -- theme = tomorrow_night,
+        theme = 'gruvbox_material',
         section_separators = { '', '' },
         component_separators = { '|', '|' }
     },
@@ -116,7 +117,6 @@ require'lualine'.setup({
         lualine_b = { 'branch', 'diff', { 'diagnostics', sources = { 'nvim_lsp' } } },
         lualine_c = { { 'filename', path = 1 } },
         lualine_x = { my_lsp_status, my_fileformat, 'encoding', 'filetype' },
-        -- lualine_x = { require'mv.lsp'.get_lsp_client, my_fileformat, 'encoding', 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' }
     },
@@ -125,7 +125,6 @@ require'lualine'.setup({
         lualine_b = { 'branch', 'diff', { 'diagnostics', sources = { 'nvim_lsp' } } },
         lualine_c = { { 'filename', path = 1 } },
         lualine_x = { my_lsp_status, my_fileformat, 'encoding', 'filetype' },
-        -- lualine_x = { require'mv.lsp'.get_lsp_client, my_fileformat, 'encoding', 'filetype' },
         lualine_y = { 'progress' },
         lualine_z = { 'location' }
     },

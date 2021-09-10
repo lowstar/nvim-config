@@ -4,11 +4,12 @@ function _G.tweak_colors()
 
     if vim.g.colors_name:find("^base16") ~= nil then
         vim.fn.Base16hi('NonText', vim.g.base16_gui02, '', vim.g.base16_cterm03, '', '', '')
+        vim.fn.Base16hi('StartifyPath', vim.g.base16_gui04, '', '', '', '', '')
         vim.fn.Base16hi('HopNextKey', vim.g.base16_gui0C, '', '', '', '', '')
         vim.fn.Base16hi('HopNextKey1', vim.g.base16_gui0C, '', '', '', '', '')
         vim.fn.Base16hi('HopNextKey2', vim.g.base16_gui0D, '', '', '', '', '')
         vim.fn.Base16hi('HopUnmatched', vim.g.base16_gui02, '', '', '', '', '')
-        vim.fn.Base16hi('InlayHint', vim.g.base16_gui03, '', '', '', 'italic', '')
+        vim.fn.Base16hi('InlayHint', vim.g.base16_gui0C, '', '', '', 'italic', '')
         vim.fn.Base16hi("LspDiagnosticsDefaultError", vim.g.base16_gui08, '', '', '', '', '')
         vim.fn.Base16hi("LspDiagnosticsDefaultWarning", vim.g.base16_gui09, '', '', '', '', '')
         vim.fn.Base16hi("LspDiagnosticsDefaultInformation", vim.g.base16_gui0A, '', '', '', '', '')
@@ -16,10 +17,8 @@ function _G.tweak_colors()
         vim.fn.Base16hi("LspReferenceRead", vim.g.base16_gui01, '', '', '', '', '')
         vim.fn.Base16hi("LspReferenceText", vim.g.base16_gui01, '', '', '', '', '')
         vim.fn.Base16hi("LspReferenceWrite", vim.g.base16_gui01, '', '', '', '', '')
-        vim.fn.Base16hi("LspDiagnosticsUnderlineError", vim.g.base16_gui08, '', '', '', '',
-                        'undercurl')
-        vim.fn.Base16hi("LspDiagnosticsUnderlineWarning", vim.g.base16_gui09, '', '', '', "",
-                        'undercurl')
+        vim.fn.Base16hi("LspDiagnosticsUnderlineError", vim.g.base16_gui08, '', '', '', '', 'undercurl')
+        vim.fn.Base16hi("LspDiagnosticsUnderlineWarning", vim.g.base16_gui09, '', '', '', "", 'undercurl')
     end
 
     require'nvim-web-devicons'.setup { default = true }
@@ -34,7 +33,7 @@ augroup END
 
 vim.o.background = 'dark'
 
-vim.cmd('colorscheme base16-tomorrow-night-eighties')
+vim.cmd('colorscheme base16-gruvbox-dark-medium')
 
 vim.o.guicursor = 'n-v-c-sm:block-blinkwait175-blinkoff150-blinkon175,' ..
                       'i-ci-ve:ver25-blinkwait175-blinkoff150-blinkon175,' ..
