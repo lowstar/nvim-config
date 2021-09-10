@@ -33,7 +33,7 @@ augroup END
 
 vim.o.background = 'dark'
 
-vim.cmd('colorscheme base16-gruvbox-dark-medium')
+vim.cmd('colorscheme base16-tomorrow-night-eighties')
 
 vim.o.guicursor = 'n-v-c-sm:block-blinkwait175-blinkoff150-blinkon175,' ..
                       'i-ci-ve:ver25-blinkwait175-blinkoff150-blinkon175,' ..
