@@ -1,14 +1,14 @@
 local check_back_space = function()
-    local col = vim.fn.col '.' - 1
-    return col == 0 or vim.fn.getline('.'):sub(col, col):match '%s' ~= nil
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col == 0 or vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') ~= nil
 end
-local luasnip = require("luasnip")
 
 local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
 local cmp = require 'cmp'
+local luasnip = require("luasnip")
 
 cmp.setup {
     completion = { completeopt = 'menu,menuone,noinsert' },
@@ -27,20 +27,20 @@ cmp.setup {
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<Tab>"] = cmp.mapping(function(fallback)
             if vim.fn.pumvisible() == 1 then
-                vim.fn.feedkeys(t("<C-n>"), "n")
+                vim.api.nvim_feedkeys(t("<C-n>"), "n", true)
             elseif luasnip.expand_or_jumpable() then
-                vim.fn.feedkeys(t("<Plug>luasnip-expand-or-jump"), "")
+                vim.api.nvim_feedkeys(t("<Plug>luasnip-expand-or-jump"), "", true)
             elseif check_back_space() then
-                vim.fn.feedkeys(t("<Tab>"), "n")
+                vim.api.nvim_feedkeys(t("<Tab>"), "n", true)
             else
                 fallback()
             end
         end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if vim.fn.pumvisible() == 1 then
-                vim.fn.feedkeys(t("<C-p>"), "n")
+                vim.api.nvim_feedkeys(t("<C-p>"), "n", true)
             elseif luasnip.jumpable(-1) then
-                vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
+                vim.api.nvim_feedkeys(t("<Plug>luasnip-jump-prev"), "", true)
             else
                 fallback()
             end
@@ -50,8 +50,7 @@ cmp.setup {
     formatting = {
         format = function(entry, vim_item)
             -- fancy icons and a name of kind
-            vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " ..
-                                vim_item.kind
+            vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
 
             -- set a name for each source
             vim_item.menu = ({
