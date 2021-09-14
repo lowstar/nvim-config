@@ -64,7 +64,7 @@ function M.common_on_attach(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'lS', "<cmd>lua require'mv.telescope'.lsp_workspace_symbols()<cr>",
                                 { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ld',
-                                "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = 'rounded' })<cr>",
+                                "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = 'rounded', focusable = false })<cr>",
                                 { noremap = true, silent = true })
     vim.api
         .nvim_buf_set_keymap(bufnr, 'n', 'ln', '<cmd>lua vim.lsp.buf.rename()<cr>', { noremap = true, silent = true })
