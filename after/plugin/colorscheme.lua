@@ -34,9 +34,13 @@ au ColorScheme * call v:lua.tweak_colors()
 augroup END
 ]], false)
 
-vim.o.background = 'dark'
-
-vim.cmd('colorscheme base16-tomorrow-night-eighties')
+if vim.env.ITERM_PROFILE == 'light' then
+    vim.o.background = 'light'
+    vim.cmd('colorscheme base16-tomorrow')
+else
+    vim.o.background = 'dark'
+    vim.cmd('colorscheme base16-tomorrow-night-eighties')
+end
 
 vim.o.guicursor = 'n-v-c-sm:block-blinkwait175-blinkoff150-blinkon175,' ..
                       'i-ci-ve:ver25-blinkwait175-blinkoff150-blinkon175,' ..

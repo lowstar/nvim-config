@@ -106,7 +106,12 @@ local my_lsp_status = function()
 end
 
 require'lualine'.setup({
-    options = { theme = tomorrow_night, section_separators = { '', '' }, component_separators = { '|', '|' } },
+    -- options = { theme = tomorrow_night, section_separators = { '', '' }, component_separators = { '|', '|' } },
+    options = {
+        theme = (vim.env.ITERM_PROFILE == 'light' and 'tomorrow' or tomorrow_night),
+        section_separators = { '', '' },
+        component_separators = { '|', '|' }
+    },
     sections = {
         lualine_a = { 'mode' },
         lualine_b = { 'branch', 'diff', { 'diagnostics', sources = { 'nvim_lsp' } } },
