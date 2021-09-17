@@ -57,13 +57,14 @@ function M.common_on_attach(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lr', "<cmd>lua vim.lsp.codelens.run()<cr>",
                                 { noremap = true, silent = true })
 
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'lD', "<cmd>lua require'mv.telescope'.lsp_document_diagnostics()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lD',
+                                "<cmd>lua require'mv.telescope'.lsp_document_diagnostics()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ls', "<cmd>lua require'mv.telescope'.lsp_document_symbols()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ls', "<cmd>lua require'mv.telescope'.lsp_document_symbols()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'lS', "<cmd>lua require'mv.telescope'.lsp_workspace_symbols()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lS', "<cmd>lua require'mv.telescope'.lsp_workspace_symbols()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'ld',
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ld',
                                 "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = 'rounded', focusable = false })<cr>",
                                 { noremap = true, silent = true })
     vim.api
