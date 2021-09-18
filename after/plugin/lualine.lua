@@ -54,59 +54,18 @@ local my_fileformat = function()
     return vim.bo.fileformat
 end
 
-local messages = require('lsp-status/messaging').messages
-
-local my_lsp_status = function()
-    local spinner_frames = { '⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷' }
-    local buf_messages = messages()
-    local msgs = {}
-
-    for _, msg in ipairs(buf_messages) do
-        local name = msg.name
-        local client_name = '[' .. name .. ']'
-        local contents
-        if msg.progress then
-            contents = msg.title
-            if msg.message then
-                contents = contents .. ' ' .. msg.message
-            end
-
-            -- this percentage format string escapes a percent sign once to show a percentage and one more
-            -- time to prevent errors in vim statusline's because of it's treatment of % chars
-            if msg.percentage then
-                contents = contents .. string.format(" (%.0f%%%%)", msg.percentage)
-            end
-
-            if msg.spinner then
-                contents = spinner_frames[(msg.spinner % #spinner_frames) + 1] .. ' ' .. contents
-            end
-        elseif msg.status then
-            contents = msg.content
-            if msg.uri then
-                local filename = vim.uri_to_fname(msg.uri)
-                filename = vim.fn.fnamemodify(filename, ':~:.')
-                local space = math.min(60, math.floor(0.6 * vim.fn.winwidth(0)))
-                if #filename > space then
-                    filename = vim.fn.pathshorten(filename)
-                end
-
-                contents = '(' .. filename .. ') ' .. contents
-            end
-        else
-            contents = msg.content
+local function my_lsp_status()
+    if #vim.lsp.buf_get_clients() > 0 then
+        local content = require'lsp-status'.status():match("^%s*(.-)%s*$")
+        if #content == 0 then
+            return require'mv.lsp'.get_lsp_client()
         end
-        table.insert(msgs, client_name .. ' ' .. contents)
+        return content
     end
-
-    if #msgs > 0 then
-        return table.concat(msgs, '')
-    else
-        return require'mv.lsp'.get_lsp_client()
-    end
+    return ''
 end
 
 require'lualine'.setup({
-    -- options = { theme = tomorrow_night, section_separators = { '', '' }, component_separators = { '|', '|' } },
     options = {
         theme = (vim.env.ITERM_PROFILE == 'light' and 'tomorrow' or tomorrow_night),
         section_separators = { '', '' },
