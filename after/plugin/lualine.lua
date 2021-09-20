@@ -1,52 +1,31 @@
-local colors = {
-    base3 = '#cccccc',
-    base23 = '#bbbbbb',
-    base2 = '#aaaaaa',
-    base1 = '#999999',
-    base0 = '#777777',
-    base00 = '#666666',
-    base01 = '#555555',
-    base02 = '#444444',
-    base023 = '#333333',
-    base03 = '#2d2d2d',
-    red = '#f2777a',
-    orange = '#f99157',
-    yellow = '#ffcc66',
-    green = '#99cc99',
-    cyan = '#009999',
-    blue = '#99cccc',
-    magenta = '#cc99cc'
-
-}
-
-local tomorrow_night = {
+local my_lualine = {
     inactive = {
-        a = { fg = colors.base3, bg = colors.base01, gui = 'bold' },
-        z = { fg = colors.base02, bg = colors.base1, gui = 'bold' }
+        a = { fg = '#' .. vim.g.base16_gui02, bg = '#' .. vim.g.base16_gui03, gui = 'bold' },
+        z = { fg = '#' .. vim.g.base16_gui02, bg = '#' .. vim.g.base16_gui03, gui = 'bold' }
     },
     normal = {
-        a = { fg = colors.base023, bg = colors.blue, gui = 'bold' },
-        b = { fg = colors.base3, bg = colors.base01 },
-        c = { fg = colors.base1, bg = colors.base02 },
-        x = { fg = colors.base2, bg = colors.base01 },
-        y = { fg = colors.base02, bg = colors.base1, gui = 'bold' },
-        z = { fg = colors.base023, bg = colors.blue, gui = 'bold' }
+        a = { fg = '#' .. vim.g.base16_gui02, bg = '#' .. vim.g.base16_gui0D, gui = 'bold' },
+        b = { fg = '#' .. vim.g.base16_gui04, bg = '#' .. vim.g.base16_gui02 },
+        c = { fg = '#' .. vim.g.base16_gui03, bg = '#' .. vim.g.base16_gui01 },
+        x = { fg = '#' .. vim.g.base16_gui04, bg = '#' .. vim.g.base16_gui02 },
+        y = { fg = '#' .. vim.g.base16_gui02, bg = '#' .. vim.g.base16_gui03, gui = 'bold' },
+        z = { fg = '#' .. vim.g.base16_gui02, bg = '#' .. vim.g.base16_gui0D, gui = 'bold' }
     },
     visual = {
-        a = { fg = colors.base023, bg = colors.magenta, gui = 'bold' },
-        z = { fg = colors.base023, bg = colors.magenta, gui = 'bold' }
+        a = { fg = '#' .. vim.g.base16_gui02, bg = '#' .. vim.g.base16_gui0E, gui = 'bold' },
+        z = { fg = '#' .. vim.g.base16_gui02, bg = '#' .. vim.g.base16_gui0E, gui = 'bold' }
     },
     replace = {
-        a = { fg = colors.base023, bg = colors.orange, gui = 'bold' },
-        z = { fg = colors.base023, bg = colors.orange, gui = 'bold' }
+        a = { fg = '#' .. vim.g.base16_gui02, bg = '#' .. vim.g.base16_gui09, gui = 'bold' },
+        z = { fg = '#' .. vim.g.base16_gui02, bg = '#' .. vim.g.base16_gui09, gui = 'bold' }
     },
     insert = {
-        a = { fg = colors.base023, bg = colors.green, gui = 'bold' },
-        z = { fg = colors.base023, bg = colors.green, gui = 'bold' }
+        a = { fg = '#' .. vim.g.base16_gui02, bg = '#' .. vim.g.base16_gui0B, gui = 'bold' },
+        z = { fg = '#' .. vim.g.base16_gui02, bg = '#' .. vim.g.base16_gui0B, gui = 'bold' }
     },
     command = {
-        a = { fg = colors.base023, bg = colors.red, gui = 'bold' },
-        z = { fg = colors.base023, bg = colors.red, gui = 'bold' }
+        a = { fg = '#' .. vim.g.base16_gui02, bg = '#' .. vim.g.base16_gui08, gui = 'bold' },
+        z = { fg = '#' .. vim.g.base16_gui02, bg = '#' .. vim.g.base16_gui08, gui = 'bold' }
     }
 }
 
@@ -66,11 +45,7 @@ local function my_lsp_status()
 end
 
 require'lualine'.setup({
-    options = {
-        theme = (vim.env.ITERM_PROFILE == 'light' and 'tomorrow' or tomorrow_night),
-        section_separators = { '', '' },
-        component_separators = { '|', '|' }
-    },
+    options = { theme = my_lualine, section_separators = { '', '' }, component_separators = { '|', '|' } },
     sections = {
         lualine_a = { 'mode' },
         lualine_b = { 'branch', 'diff', { 'diagnostics', sources = { 'nvim_lsp' } } },
