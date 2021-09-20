@@ -79,7 +79,12 @@ return require('packer').startup(function(use)
     use 'mfussenegger/nvim-dap'
     use 'rcarriga/nvim-dap-ui'
 
-    use 'rust-lang/rust.vim'
+    use {
+        'rust-lang/rust.vim',
+        setup = function()
+            vim.g.rustfmt_autosave = 1
+        end
+    }
 
     use {
         'phaazon/hop.nvim',
