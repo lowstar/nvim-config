@@ -76,8 +76,8 @@ return require('packer').startup(function(use)
     use 'tommcdo/vim-exchange'
 
     use 'simrat39/rust-tools.nvim'
-    use 'mfussenegger/nvim-dap'
-    use 'rcarriga/nvim-dap-ui'
+    -- use 'mfussenegger/nvim-dap'
+    -- use 'rcarriga/nvim-dap-ui'
 
     use {
         'rust-lang/rust.vim',
