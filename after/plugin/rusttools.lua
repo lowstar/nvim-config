@@ -1,5 +1,3 @@
-vim.g.rustfmt_autosave = 1
-
 require('rust-tools').setup({
     tools = { inlay_hints = { highlight = "InlayHint" }, hover_actions = { auto_focus = true } },
     server = {
