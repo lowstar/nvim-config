@@ -16,17 +16,27 @@ require'nvim-treesitter.configs'.setup {
             -- node_decremental = "grm",
         }
     },
-    indent = { enable = true },
-    context_commentstring = { enable = true },
-    autotag = { enable = true },
-    rainbow = { enable = true },
+    indent = {
+        enable = true
+    },
+    context_commentstring = {
+        enable = true
+    },
+    autotag = {
+        enable = true
+    },
+    rainbow = {
+        enable = true
+    },
     playground = {
         enable = true,
         disable = {},
         updatetime = 25 -- Debounced time for highlighting nodes in the playground from source code
     },
     refactor = {
-        highlight_definitions = { enable = true },
+        highlight_definitions = {
+            enable = true
+        },
         -- smart_rename = {
         --     enable = true,
         --     keymaps = {
