@@ -48,6 +48,6 @@ if vim.fn.executable('rg') then
     vim.o.grepformat = '%f:%l:%c:%m'
 end
 
-if vim.fn.has('unnamedplus') == 1 then
-    vim.o.clipboard = 'unnamed,unnamedplus'
-end
+-- if vim.fn.has('unnamedplus') == 1 then
+--     vim.o.clipboard = 'unnamed,unnamedplus'
+-- end
