@@ -45,7 +45,11 @@ local function my_lsp_status()
 end
 
 require'lualine'.setup({
-    options = { theme = my_lualine, section_separators = { '', '' }, component_separators = { '|', '|' } },
+    options = {
+        theme = my_lualine,
+        section_separators = { '', '' },
+        component_separators = { '|', '|' }
+    },
     sections = {
         lualine_a = { 'mode' },
         lualine_b = { 'branch', 'diff', { 'diagnostics', sources = { 'nvim_lsp' } } },

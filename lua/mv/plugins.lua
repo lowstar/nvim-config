@@ -33,7 +33,10 @@ return require('packer').startup(function(use)
     use 'nvim-lua/plenary.nvim'
     use 'nvim-telescope/telescope.nvim'
 
-    use { 'nvim-telescope/telescope-fzf-native.nvim', run = (vim.fn.has('bsd') > 0 and 'gmake' or 'make') }
+    use {
+        'nvim-telescope/telescope-fzf-native.nvim',
+        run = (vim.fn.has('bsd') > 0 and 'gmake' or 'make')
+    }
 
     use 'nvim-telescope/telescope-symbols.nvim'
     use 'nvim-telescope/telescope-hop.nvim'
@@ -75,9 +78,15 @@ return require('packer').startup(function(use)
     use 'windwp/nvim-autopairs'
     use 'tommcdo/vim-exchange'
 
+    -- use {
+    --     "rcarriga/nvim-dap-ui",
+    --     requires = { "mfussenegger/nvim-dap" },
+    --     config = function()
+    --         require("dapui").setup()
+    --     end
+    -- }
+
     use 'simrat39/rust-tools.nvim'
-    -- use 'mfussenegger/nvim-dap'
-    -- use 'rcarriga/nvim-dap-ui'
 
     use {
         'rust-lang/rust.vim',
@@ -100,5 +109,20 @@ return require('packer').startup(function(use)
         end
     }
 
-    use { 'mhinz/vim-startify' }
+    use 'mhinz/vim-startify'
+
+    use {
+        'kyazdani42/nvim-tree.lua',
+        requires = 'kyazdani42/nvim-web-devicons',
+        config = function()
+            require'nvim-tree'.setup({ update_focused_file = { enable = true } })
+
+            vim.api.nvim_set_keymap('n', '<A-n>', "<cmd>NvimTreeToggle<cr>",
+                                    { noremap = true, silent = true })
+
+            vim.api.nvim_set_keymap('n', '<leader>n', "<cmd>NvimTreeFindFile<cr>",
+                                    { noremap = true, silent = true })
+        end
+    }
+
 end)
