@@ -1,25 +1,43 @@
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help,
+                                                              { border = "single" })
 
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = true,
+-- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+--     underline = true,
+--     virtual_text = true,
+--     update_in_insert = false,
+--     severity_sort = { reverse = true }
+-- })
+
+vim.diagnostic.config({
     virtual_text = true,
+    signs = true,
+    underline = true,
     update_in_insert = false,
     severity_sort = true
 })
 
-vim.fn.sign_define("LspDiagnosticsSignError",
-                   { texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError" })
-vim.fn.sign_define("LspDiagnosticsSignWarning",
-                   { texthl = "LspDiagnosticsSignWarning", text = "", numhl = "LspDiagnosticsSignWarning" })
-vim.fn.sign_define("LspDiagnosticsSignInformation",
-                   { texthl = "LspDiagnosticsSignInformation", text = "", numhl = "LspDiagnosticsSignInformation" })
-vim.fn.sign_define("LspDiagnosticsSignHint",
-                   { texthl = "LspDiagnosticsSignHint", text = "", numhl = "LspDiagnosticsSignHint" })
+vim.fn.sign_define("DiagnosticSignError",
+                   { texthl = "DiagnosticSignError", text = "", numhl = "DiagnosticSignError" })
+vim.fn.sign_define("DiagnosticSignWarn",
+                   { texthl = "DiagnosticSignWarn", text = "", numhl = "DiagnosticSignWarn" })
+vim.fn.sign_define("DiagnosticSignInfo",
+                   { texthl = "DiagnosticSignInfo", text = "", numhl = "DiagnosticSignInfo" })
+vim.fn.sign_define("DiagnosticSignHint",
+                   { texthl = "DiagnosticSignHint", text = "", numhl = "DiagnosticSignHint" })
+
+-- vim.fn.sign_define("LspDiagnosticsSignError",
+--                    { texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError" })
+-- vim.fn.sign_define("LspDiagnosticsSignWarning",
+--                    { texthl = "LspDiagnosticsSignWarning", text = "", numhl = "LspDiagnosticsSignWarning" })
+-- vim.fn.sign_define("LspDiagnosticsSignInformation",
+--                    { texthl = "LspDiagnosticsSignInformation", text = "", numhl = "LspDiagnosticsSignInformation" })
+-- vim.fn.sign_define("LspDiagnosticsSignHint",
+--                    { texthl = "LspDiagnosticsSignHint", text = "", numhl = "LspDiagnosticsSignHint" })
 
 vim.fn.sign_define("LightBulbSign",
-                   { text = "", texthl = "LspDiagnosticsSignInformation", numhl = "LspDiagnosticsSignInformation" })
+                   { text = "", texthl = "DiagnosticSignInfo", numhl = "DiagnosticSignInfo" })
 
 local M = {}
 
@@ -32,15 +50,19 @@ function M.common_on_attach(client, bufnr)
                                 { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', "<cmd>lua vim.lsp.buf.signature_help()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', "<cmd>lua vim.lsp.buf.hover()<cr>", { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', "<cmd>lua vim.lsp.buf.hover()<cr>",
+                                { noremap = true, silent = true })
 
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>1', "<cmd>lua vim.lsp.buf.code_action()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>1', ":<C-U>lua vim.lsp.buf.range_code_action()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>1',
+                                ":<C-U>lua vim.lsp.buf.range_code_action()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dp', "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dp',
+                                "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dn', "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dn',
+                                "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>",
                                 { noremap = true, silent = true })
 
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', "<cmd>lua vim.lsp.buf.definition()<cr>",
@@ -50,9 +72,11 @@ function M.common_on_attach(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gT', "<cmd>lua vim.lsp.buf.type_definition()<cr>",
                                 { noremap = true, silent = true })
 
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', "<cmd>lua require'mv.telescope'.lsp_references()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr',
+                                "<cmd>lua require'mv.telescope'.lsp_references()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gI', "<cmd>lua require'mv.telescope'.lsp_implementations()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gI',
+                                "<cmd>lua require'mv.telescope'.lsp_implementations()<cr>",
                                 { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lr', "<cmd>lua vim.lsp.codelens.run()<cr>",
                                 { noremap = true, silent = true })
@@ -60,21 +84,25 @@ function M.common_on_attach(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lD',
                                 "<cmd>lua require'mv.telescope'.lsp_document_diagnostics()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ls', "<cmd>lua require'mv.telescope'.lsp_document_symbols()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ls',
+                                "<cmd>lua require'mv.telescope'.lsp_document_symbols()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lS', "<cmd>lua require'mv.telescope'.lsp_workspace_symbols()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lS',
+                                "<cmd>lua require'mv.telescope'.lsp_workspace_symbols()<cr>",
                                 { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ld',
-                                "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = 'rounded', focusable = false })<cr>",
+                                "<cmd>lua vim.diagnostic.show_position_diagnostics({ border = 'rounded', focusable = false })<cr>",
                                 { noremap = true, silent = true })
-    vim.api
-        .nvim_buf_set_keymap(bufnr, 'n', 'ln', '<cmd>lua vim.lsp.buf.rename()<cr>', { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ln', '<cmd>lua vim.lsp.buf.rename()<cr>',
+                                { noremap = true, silent = true })
 
     if client.resolved_capabilities.document_formatting then
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf', "<cmd>lua vim.lsp.buf.formatting()<cr>",
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf',
+                                    "<cmd>lua vim.lsp.buf.formatting()<cr>",
                                     { noremap = true, silent = true })
     elseif client.resolved_capabilities.document_range_formatting then
-        vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>lf', "<cmr>lua vim.lsp.buf.range_formatting()<cr>",
+        vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>lf',
+                                    "<cmr>lua vim.lsp.buf.range_formatting()<cr>",
                                     { noremap = true, silent = true })
     end
 
@@ -124,12 +152,6 @@ function M.get_lsp_client()
     end
     local res = table.concat(tbl, ",")
     return res
-
-    -- for _, client in ipairs(clients) do
-    --     local filetypes = client.config.filetypes
-    --     if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then return client.name end
-    -- end
-    -- return msg
 end
 
 vim.lsp.set_log_level(4)
