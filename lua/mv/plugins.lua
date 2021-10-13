@@ -79,13 +79,7 @@ return require('packer').startup(function(use)
     use 'windwp/nvim-autopairs'
     use 'tommcdo/vim-exchange'
 
-    -- use {
-    --     "rcarriga/nvim-dap-ui",
-    --     requires = { "mfussenegger/nvim-dap" },
-    --     config = function()
-    --         require("dapui").setup()
-    --     end
-    -- }
+    use 'mfussenegger/nvim-dap'
 
     use 'simrat39/rust-tools.nvim'
 
