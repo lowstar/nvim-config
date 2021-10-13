@@ -1,10 +1,8 @@
-local check_back_space = function()
+local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col == 0 or vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') ~= nil
-end
-
-local t = function(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
+    return col ~= 0 and
+               vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") ==
+               nil
 end
 
 local cmp = require 'cmp'
@@ -25,22 +23,24 @@ cmp.setup {
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-e>"] = cmp.mapping.close(),
         ["<C-Space>"] = cmp.mapping.complete(),
+
         ["<Tab>"] = cmp.mapping(function(fallback)
-            if vim.fn.pumvisible() == 1 then
-                vim.api.nvim_feedkeys(t("<C-n>"), "n", true)
+            if cmp.visible() then
+                cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
-                vim.api.nvim_feedkeys(t("<Plug>luasnip-expand-or-jump"), "", true)
-            elseif check_back_space() then
-                vim.api.nvim_feedkeys(t("<Tab>"), "n", true)
+                luasnip.expand_or_jump()
+            elseif has_words_before() then
+                cmp.complete()
             else
                 fallback()
             end
         end, { "i", "s" }),
+
         ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if vim.fn.pumvisible() == 1 then
-                vim.api.nvim_feedkeys(t("<C-p>"), "n", true)
+            if cmp.visible() then
+                cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
-                vim.api.nvim_feedkeys(t("<Plug>luasnip-jump-prev"), "", true)
+                luasnip.jump(-1)
             else
                 fallback()
             end
@@ -50,7 +50,8 @@ cmp.setup {
     formatting = {
         format = function(entry, vim_item)
             -- fancy icons and a name of kind
-            vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
+            vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " ..
+                                vim_item.kind
 
             -- set a name for each source
             vim_item.menu = ({
@@ -72,9 +73,7 @@ cmp.setup {
         { name = 'luasnip' }
     },
 
-    documentation = { border = 'rounded' },
-
-    experimental = { ghost_text = false }
+    documentation = { border = 'rounded' }
 
 }
 
