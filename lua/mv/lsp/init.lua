@@ -3,9 +3,9 @@ local lspconfig = require 'lspconfig'
 require'lspkind'.init()
 require'mv.lsp.status'.setup()
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
 vim.diagnostic.config({
     virtual_text = true,
@@ -24,7 +24,6 @@ vim.fn.sign_define("DiagnosticSignHint", { texthl = "DiagnosticSignHint", text =
 vim.fn.sign_define("LightBulbSign", { text = "", texthl = "DiagnosticSignInfo", numhl = "DiagnosticSignInfo" })
 
 local function custom_attach(client, bufnr)
-    -- function M.common_on_attach(client, bufnr)
     require'lsp-status'.on_attach(client)
 
     vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -86,16 +85,14 @@ local function custom_attach(client, bufnr)
         augroup end
     ]]
 
-    if false then
-        if client.resolved_capabilities.document_highlight then
-            vim.cmd [[
+    if false and client.resolved_capabilities.document_highlight then
+        vim.cmd [[
             augroup lsp_document_highlight
             autocmd! * <buffer>
             autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
             autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
             augroup END
             ]]
-        end
     end
 
     if client.resolved_capabilities.code_lens then
@@ -209,7 +206,6 @@ local setup_server = function(server, config)
 
     config = vim.tbl_deep_extend("force", {
         on_attach = custom_attach,
-        -- on_attach = require'mv.lsp'.common_on_attach,
         capabilities = updated_capabilities,
         flags = { debounce_text_changes = 50 }
     }, config)
@@ -225,6 +221,7 @@ require('rust-tools').setup({
     tools = { inlay_hints = { highlight = "InlayHint" }, hover_actions = { auto_focus = true } },
     server = {
         -- flags = { allow_incremental_sync = true, debounce_text_changes = 150 },
+        -- capabilities = updated_capabilities,
         on_attach = function(client, bufnr)
             custom_attach(client, bufnr)
             vim.api.nvim_buf_set_keymap(bufnr, 'v', 'K', ":<C-U>RustHoverRange<cr>", { noremap = true, silent = true })
