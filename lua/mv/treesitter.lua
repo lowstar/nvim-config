@@ -53,6 +53,30 @@ require'nvim-treesitter.configs'.setup {
                 goto_previous_usage = "<a-#>"
             }
         }
+    },
+    textobjects = {
+        move = {
+            enable = true,
+            set_jumps = true,
+
+            goto_next_start = { ["]m"] = "@function.outer", ["]]"] = "@class.outer" },
+            goto_next_end = { ["]M"] = "@function.outer", ["]["] = "@class.outer" },
+            goto_previous_start = { ["[m"] = "@function.outer", ["[["] = "@class.outer" },
+            goto_previous_end = { ["[M"] = "@function.outer", ["[]"] = "@class.outer" }
+        },
+        select = {
+            enable = true,
+            keymaps = {
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+
+                ["ac"] = "@conditional.outer",
+                ["ic"] = "@conditional.inner",
+
+                ["aa"] = "@parameter.outer",
+                ["ia"] = "@parameter.inner"
+            }
+        }
     }
 }
 
