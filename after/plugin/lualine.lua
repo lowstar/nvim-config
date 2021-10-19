@@ -33,11 +33,30 @@ local my_fileformat = function()
     return vim.bo.fileformat
 end
 
+local function get_lsp_clients()
+    local msg = ''
+    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+    local clients = vim.lsp.get_active_clients()
+    if next(clients) == nil then
+        return msg
+    end
+
+    local tbl = {}
+    for _, client in ipairs(clients) do
+        local filetypes = client.config.filetypes
+        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+            table.insert(tbl, client.name)
+        end
+    end
+    local res = table.concat(tbl, ",")
+    return res
+end
+
 local function my_lsp_status()
     if #vim.lsp.buf_get_clients() > 0 then
         local content = require'lsp-status'.status():match("^%s*(.-)%s*$")
         if #content == 0 then
-            return require'mv.lsp'.get_lsp_client()
+            return get_lsp_clients()
         end
         return content
     end
@@ -45,11 +64,7 @@ local function my_lsp_status()
 end
 
 require'lualine'.setup({
-    options = {
-        theme = my_lualine,
-        section_separators = { '', '' },
-        component_separators = { '|', '|' }
-    },
+    options = { theme = my_lualine, section_separators = { '', '' }, component_separators = { '|', '|' } },
     sections = {
         lualine_a = { 'mode' },
         lualine_b = { 'branch', 'diff', { 'diagnostics', sources = { 'nvim_lsp' } } },

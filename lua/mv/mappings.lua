@@ -29,21 +29,16 @@ map('n', '<leader>ev', ':ed $MYVIMRC<cr>', { noremap = true, silent = true })
 map('n', '<leader>sv', ':luafile $MYVIMRC<cr>', { noremap = true, silent = true })
 
 -- Telescope
-
 map('n', '<leader>o', "<cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>",
     { noremap = true, silent = true })
 
-map('n', '<leader>b', "<cmd>lua require('telescope.builtin').buffers()<cr>",
-    { noremap = true, silent = true })
+map('n', '<leader>b', "<cmd>lua require('telescope.builtin').buffers()<cr>", { noremap = true, silent = true })
 
-map('n', '<leader>g', "<cmd>lua require('telescope.builtin').live_grep()<cr>",
-    { noremap = true, silent = true })
+map('n', '<leader>g', "<cmd>lua require('telescope.builtin').live_grep()<cr>", { noremap = true, silent = true })
 
-map('n', '<leader>v', "<cmd>lua require('mv.telescope').files_config_nvim()<cr>",
-    { noremap = true, silent = true })
+map('n', '<leader>v', "<cmd>lua require('mv.telescope').files_config_nvim()<cr>", { noremap = true, silent = true })
 
-map('n', '<leader>f', "<cmd>lua require('telescope.builtin').file_browser()<cr>",
-    { noremap = true, silent = true })
+map('n', '<leader>f', "<cmd>lua require('telescope.builtin').file_browser()<cr>", { noremap = true, silent = true })
 
 -- Hop
 map('n', '<leader>j', "<cmd>lua require'hop'.hint_words()<cr>", { noremap = true, silent = true })

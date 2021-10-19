@@ -1,15 +1,7 @@
-local has_words_before = function()
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and
-               vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") ==
-               nil
-end
-
 local cmp = require 'cmp'
-local luasnip = require("luasnip")
 
 cmp.setup {
-    completion = { completeopt = 'menu,menuone,noinsert' },
+    -- completion = { completeopt = 'menu,menuone,noinsert' },
 
     snippet = {
         expand = function(args)
@@ -18,59 +10,26 @@ cmp.setup {
     },
 
     mapping = {
-        ["<CR>"] = cmp.mapping.confirm(),
+        ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-d>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-e>"] = cmp.mapping.close(),
-        ["<C-Space>"] = cmp.mapping.complete(),
-
-        ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item()
-            elseif luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
-            elseif has_words_before() then
-                cmp.complete()
-            else
-                fallback()
-            end
-        end, { "i", "s" }),
-
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-            else
-                fallback()
-            end
-        end, { "i", "s" })
+        ["<C-y>"] = cmp.mapping.confirm { behavior = cmp.ConfirmBehavior.Insert, select = true }
     },
 
     formatting = {
-        format = function(entry, vim_item)
-            -- fancy icons and a name of kind
-            vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " ..
-                                vim_item.kind
-
-            -- set a name for each source
-            vim_item.menu = ({
-                buffer = "[buffer]",
-                nvim_lua = "[lua]",
-                nvim_lsp = "[LSP]",
-                path = "[path]",
-                luasnip = "[luasnip]"
-            })[entry.source.name]
-            return vim_item
-        end
+        format = require'lspkind'.cmp_format {
+            menu = { buffer = "BUFFER", nvim_lua = "LUA", nvim_lsp = "LSP", path = "PATH", luasnip = "LUASNIP" }
+            -- menu = { buffer = "[BUFFER]", nvim_lua = "[LUA]", nvim_lsp = "[LSP]", path = "[PATH]", luasnip = "[LUASNIP]" }
+        }
     },
 
     sources = {
-        { name = 'nvim_lua' },
-        { name = 'nvim_lsp' },
-        { name = 'buffer' },
-        { name = 'path' },
-        { name = 'luasnip' }
+        { name = "nvim_lua" },
+        { name = "nvim_lsp", priority = 10 },
+        { name = "path" },
+        { name = "buffer", priority = 2, keyword_length = 5, max_item_count = 5 },
+        { name = "luasnip" }
     },
 
     documentation = { border = 'rounded' }
@@ -79,4 +38,5 @@ cmp.setup {
 
 require('nvim-autopairs').setup()
 
-require("nvim-autopairs.completion.cmp").setup()
+require("nvim-autopairs.completion.cmp").setup { auto_select = false }
+

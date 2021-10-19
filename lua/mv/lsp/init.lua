@@ -1,14 +1,11 @@
+local lspconfig = require 'lspconfig'
+
+require'lspkind'.init()
+require'mv.lsp.status'.setup()
+
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help,
-                                                              { border = "single" })
-
--- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
---     underline = true,
---     virtual_text = true,
---     update_in_insert = false,
---     severity_sort = { reverse = true }
--- })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
 
 vim.diagnostic.config({
     virtual_text = true,
@@ -20,49 +17,31 @@ vim.diagnostic.config({
 
 vim.fn.sign_define("DiagnosticSignError",
                    { texthl = "DiagnosticSignError", text = "", numhl = "DiagnosticSignError" })
-vim.fn.sign_define("DiagnosticSignWarn",
-                   { texthl = "DiagnosticSignWarn", text = "", numhl = "DiagnosticSignWarn" })
-vim.fn.sign_define("DiagnosticSignInfo",
-                   { texthl = "DiagnosticSignInfo", text = "", numhl = "DiagnosticSignInfo" })
-vim.fn.sign_define("DiagnosticSignHint",
-                   { texthl = "DiagnosticSignHint", text = "", numhl = "DiagnosticSignHint" })
+vim.fn.sign_define("DiagnosticSignWarn", { texthl = "DiagnosticSignWarn", text = "", numhl = "DiagnosticSignWarn" })
+vim.fn.sign_define("DiagnosticSignInfo", { texthl = "DiagnosticSignInfo", text = "", numhl = "DiagnosticSignInfo" })
+vim.fn.sign_define("DiagnosticSignHint", { texthl = "DiagnosticSignHint", text = "", numhl = "DiagnosticSignHint" })
 
--- vim.fn.sign_define("LspDiagnosticsSignError",
---                    { texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError" })
--- vim.fn.sign_define("LspDiagnosticsSignWarning",
---                    { texthl = "LspDiagnosticsSignWarning", text = "", numhl = "LspDiagnosticsSignWarning" })
--- vim.fn.sign_define("LspDiagnosticsSignInformation",
---                    { texthl = "LspDiagnosticsSignInformation", text = "", numhl = "LspDiagnosticsSignInformation" })
--- vim.fn.sign_define("LspDiagnosticsSignHint",
---                    { texthl = "LspDiagnosticsSignHint", text = "", numhl = "LspDiagnosticsSignHint" })
+vim.fn.sign_define("LightBulbSign", { text = "", texthl = "DiagnosticSignInfo", numhl = "DiagnosticSignInfo" })
 
-vim.fn.sign_define("LightBulbSign",
-                   { text = "", texthl = "DiagnosticSignInfo", numhl = "DiagnosticSignInfo" })
-
-local M = {}
-
-function M.common_on_attach(client, bufnr)
+local function custom_attach(client, bufnr)
+    -- function M.common_on_attach(client, bufnr)
     require'lsp-status'.on_attach(client)
 
     vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    vim.api.nvim_buf_set_keymap(bufnr, 'i', '<C-k>', "<cmd>lua vim.lsp.buf.signature_help()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'i', '<C-s>', "<cmd>lua vim.lsp.buf.signature_help()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', "<cmd>lua vim.lsp.buf.signature_help()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-s>', "<cmd>lua vim.lsp.buf.signature_help()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', "<cmd>lua vim.lsp.buf.hover()<cr>",
-                                { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', "<cmd>lua vim.lsp.buf.hover()<cr>", { noremap = true, silent = true })
 
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>1', "<cmd>lua vim.lsp.buf.code_action()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>1',
-                                ":<C-U>lua vim.lsp.buf.range_code_action()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>1', ":<C-U>lua vim.lsp.buf.range_code_action()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dp',
-                                "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dp', "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dn',
-                                "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dn', "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>",
                                 { noremap = true, silent = true })
 
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', "<cmd>lua vim.lsp.buf.definition()<cr>",
@@ -72,11 +51,9 @@ function M.common_on_attach(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gT', "<cmd>lua vim.lsp.buf.type_definition()<cr>",
                                 { noremap = true, silent = true })
 
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr',
-                                "<cmd>lua require'mv.telescope'.lsp_references()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', "<cmd>lua require'mv.telescope'.lsp_references()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gI',
-                                "<cmd>lua require'mv.telescope'.lsp_implementations()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gI', "<cmd>lua require'mv.telescope'.lsp_implementations()<cr>",
                                 { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lr', "<cmd>lua vim.lsp.codelens.run()<cr>",
                                 { noremap = true, silent = true })
@@ -84,11 +61,9 @@ function M.common_on_attach(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lD',
                                 "<cmd>lua require'mv.telescope'.lsp_document_diagnostics()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ls',
-                                "<cmd>lua require'mv.telescope'.lsp_document_symbols()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ls', "<cmd>lua require'mv.telescope'.lsp_document_symbols()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lS',
-                                "<cmd>lua require'mv.telescope'.lsp_workspace_symbols()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lS', "<cmd>lua require'mv.telescope'.lsp_workspace_symbols()<cr>",
                                 { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ld',
                                 "<cmd>lua vim.diagnostic.show_position_diagnostics({ border = 'rounded', focusable = false })<cr>",
@@ -97,12 +72,10 @@ function M.common_on_attach(client, bufnr)
                                 { noremap = true, silent = true })
 
     if client.resolved_capabilities.document_formatting then
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf',
-                                    "<cmd>lua vim.lsp.buf.formatting()<cr>",
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lf', "<cmd>lua vim.lsp.buf.formatting()<cr>",
                                     { noremap = true, silent = true })
     elseif client.resolved_capabilities.document_range_formatting then
-        vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>lf',
-                                    "<cmr>lua vim.lsp.buf.range_formatting()<cr>",
+        vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>lf', "<cmr>lua vim.lsp.buf.range_formatting()<cr>",
                                     { noremap = true, silent = true })
     end
 
@@ -129,34 +102,141 @@ function M.common_on_attach(client, bufnr)
         vim.cmd [[
         augroup lsp_document_codelens
         au! * <buffer>
-        autocmd CursorHold,CursorHoldI,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
+        autocmd BufEnter,CursorHold,InsertLeave <buffer> lua vim.lsp.codelens.refresh()
         augroup END
         ]]
     end
 end
 
-function M.get_lsp_client()
-    local msg = ''
-    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-    local clients = vim.lsp.get_active_clients()
-    if next(clients) == nil then
-        return msg
-    end
-
-    local tbl = {}
-    for _, client in ipairs(clients) do
-        local filetypes = client.config.filetypes
-        if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-            table.insert(tbl, client.name)
-        end
-    end
-    local res = table.concat(tbl, ",")
-    return res
-end
-
 vim.lsp.set_log_level(4)
 
-require('mv.lsp.status').setup()
+local bufdir = vim.fn.expand('%:p:h')
 
-return M
+local sumneko_root_path = vim.fn.expand('$HOME') .. '/devel/lua-language-server'
+local sumneko_binary = sumneko_root_path .. '/bin/macOS/lua-language-server'
+
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
+local luaFormat = { formatCommand = "lua-format -i", formatStdin = true }
+local prettier_global = { formatCommand = "prettier --stdin-filepath ${INPUT}", formatStdin = true }
+
+local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
+updated_capabilities = vim.tbl_deep_extend("keep", updated_capabilities, require'lsp-status'.capabilities)
+updated_capabilities.textDocument.codeLens = { dynamicRegistration = false }
+updated_capabilities = require("cmp_nvim_lsp").update_capabilities(updated_capabilities)
+
+local servers = {
+    pyright = true,
+    vimls = true,
+    html = true,
+    cssls = true,
+    eslint = true,
+
+    jsonls = {
+        commands = {
+            Format = {
+                function()
+                    vim.lsp.buf.range_formatting({}, { 0, 0 }, { vim.fn.line("$"), 0 })
+                end
+            }
+        }
+    },
+
+    tsserver = {
+        on_init = function(client)
+            print("tsserver oninit")
+            client.resolved_capabilities.document_formatting = false
+            client.resolved_capabilities.document_range_formatting = false
+        end
+    },
+
+    clangd = {
+        cmd = { "clangd", "--background-index", "--query-driver=**/arm-none-eabi*" },
+        root_dir = lspconfig.util.root_pattern("compile_commands.json") or bufdir
+    },
+
+    sumneko_lua = {
+        cmd = { sumneko_binary, '-E', sumneko_root_path .. '/main.lua' },
+        settings = {
+            documentFormatting = false,
+            Lua = {
+                runtime = {
+                    -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                    version = 'LuaJIT',
+                    path = runtime_path
+                },
+                diagnostics = {
+                    -- Get the language server to recognize the `vim` global
+                    globals = { 'vim' }
+                },
+                workspace = {
+                    -- Make the server aware of Neovim runtime files
+                    library = vim.api.nvim_get_runtime_file("", true)
+                },
+                -- Do not send telemetry data containing a randomized but unique identifier
+                telemetry = { enable = false }
+            }
+        }
+    },
+
+    efm = {
+        init_options = { documentFormatting = true, codeAction = false },
+        root_dir = function(fname)
+            return lspconfig.util.root_pattern(".prettier*")(fname) or
+                       lspconfig.util.root_pattern(".clang-format")(fname) or
+                       lspconfig.util.root_pattern(".rustfmt.toml")(fname) or
+                       lspconfig.util.root_pattern(".git/")(fname) or bufdir
+        end,
+
+        filetypes = { "lua", "javascript", "javascriptreact" },
+        settings = {
+            rootMarkers = { ".git/" },
+            languages = { lua = { luaFormat }, javascript = { prettier_global }, javascriptreact = { prettier_global } }
+        }
+    }
+}
+
+local setup_server = function(server, config)
+    if not config then
+        return
+    end
+
+    if type(config) ~= "table" then
+        config = {}
+    end
+
+    config = vim.tbl_deep_extend("force", {
+        on_attach = custom_attach,
+        -- on_attach = require'mv.lsp'.common_on_attach,
+        capabilities = updated_capabilities,
+        flags = { debounce_text_changes = 50 }
+    }, config)
+
+    lspconfig[server].setup(config)
+end
+
+for server, config in pairs(servers) do
+    setup_server(server, config)
+end
+
+require('rust-tools').setup({
+    tools = { inlay_hints = { highlight = "InlayHint" }, hover_actions = { auto_focus = true } },
+    server = {
+        -- flags = { allow_incremental_sync = true, debounce_text_changes = 150 },
+        on_attach = function(client, bufnr)
+            custom_attach(client, bufnr)
+            vim.api.nvim_buf_set_keymap(bufnr, 'v', 'K', ":<C-U>RustHoverRange<cr>", { noremap = true, silent = true })
+        end
+        -- settings = {
+        --     ["rust-analyzer"] = {
+        --         assist = { importMergeBehavior = "last", importPrefix = "by_self" },
+        --         cargo = { loadOutDirsFromCheck = true },
+        --         procMacro = { enable = true },
+        --         rustfmt = { enableRangeFormatting = true }
+        --     }
+        -- }
+    }
+})
 

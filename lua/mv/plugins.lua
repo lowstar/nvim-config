@@ -33,21 +33,13 @@ return require('packer').startup(function(use)
     use 'nvim-lua/plenary.nvim'
     use 'nvim-telescope/telescope.nvim'
 
-    use {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        run = (vim.fn.has('bsd') > 0 and 'gmake' or 'make')
-    }
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = (vim.fn.has('bsd') > 0 and 'gmake' or 'make') }
 
     use 'nvim-telescope/telescope-symbols.nvim'
     use 'nvim-telescope/telescope-hop.nvim'
 
     use 'neovim/nvim-lspconfig'
-    use {
-        'onsails/lspkind-nvim',
-        config = function()
-            require'lspkind'.init()
-        end
-    }
+    use 'onsails/lspkind-nvim'
     use 'nvim-lua/lsp_extensions.nvim'
     use 'nvim-lua/lsp-status.nvim'
     use 'kosayoda/nvim-lightbulb'
@@ -72,12 +64,14 @@ return require('packer').startup(function(use)
         }
     }
 
-    use 'airblade/vim-gitgutter'
+    -- use 'airblade/vim-gitgutter'
     use 'tpope/vim-fugitive'
     use 'tpope/vim-commentary'
     use 'tpope/vim-surround'
     use 'windwp/nvim-autopairs'
     use 'tommcdo/vim-exchange'
+
+    use 'lewis6991/gitsigns.nvim'
 
     use 'mfussenegger/nvim-dap'
 
@@ -105,6 +99,9 @@ return require('packer').startup(function(use)
     }
 
     use 'mhinz/vim-startify'
+    use { "dstein64/vim-startuptime", cmd = "StartupTime" }
+
+    use 'rcarriga/nvim-notify'
 
     use {
         'kyazdani42/nvim-tree.lua',
@@ -112,11 +109,9 @@ return require('packer').startup(function(use)
         config = function()
             require'nvim-tree'.setup({ update_focused_file = { enable = true } })
 
-            vim.api.nvim_set_keymap('n', '<A-n>', "<cmd>NvimTreeToggle<cr>",
-                                    { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('n', '<A-n>', "<cmd>NvimTreeToggle<cr>", { noremap = true, silent = true })
 
-            vim.api.nvim_set_keymap('n', '<leader>n', "<cmd>NvimTreeFindFile<cr>",
-                                    { noremap = true, silent = true })
+            vim.api.nvim_set_keymap('n', '<leader>n', "<cmd>NvimTreeFindFile<cr>", { noremap = true, silent = true })
         end
     }
 
