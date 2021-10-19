@@ -22,9 +22,9 @@ function _G.tweak_colors()
         vim.fn.Base16hi("DiagnosticUnderlineInfo", vim.g.base16_gui0A, '', '', '', 'underline', 'underline')
         vim.fn.Base16hi("DiagnosticUnderlineHint", vim.g.base16_gui0C, '', '', '', 'underline', 'underline')
 
-        vim.fn.Base16hi("LspReferenceRead", vim.g.base16_gui01, '', '', '', '', '')
-        vim.fn.Base16hi("LspReferenceText", vim.g.base16_gui01, '', '', '', '', '')
-        vim.fn.Base16hi("LspReferenceWrite", vim.g.base16_gui01, '', '', '', '', '')
+        vim.fn.Base16hi("LspReferenceRead", vim.g.base16_gui01, vim.g.base16_gui09, '', '', '', '')
+        vim.fn.Base16hi("LspReferenceText", vim.g.base16_gui04, vim.g.base16_gui02, '', '', '', '')
+        vim.fn.Base16hi("LspReferenceWrite", vim.g.base16_gui01, vim.g.base16_gui08, '', '', '', '')
     end
 
     require'nvim-web-devicons'.setup { default = true }
