@@ -65,7 +65,7 @@ local function custom_attach(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lS', "<cmd>lua require'mv.telescope'.lsp_workspace_symbols()<cr>",
                                 { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ld',
-                                "<cmd>lua vim.diagnostic.show_position_diagnostics({ border = 'rounded', focusable = false })<cr>",
+                                "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = 'rounded' })<cr>",
                                 { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ln', '<cmd>lua vim.lsp.buf.rename()<cr>',
                                 { noremap = true, silent = true })
