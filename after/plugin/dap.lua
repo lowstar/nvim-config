@@ -1,17 +1,13 @@
 vim.api.nvim_set_keymap('n', '<leader>db', "<cmd>lua require('dap').toggle_breakpoint()<cr>",
                         { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<leader>dc', "<cmd>lua require('dap').continue()<cr>",
-                        { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>dc', "<cmd>lua require('dap').continue()<cr>", { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<leader>dx', "<cmd>lua require('dap').stop()<cr>",
-                        { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>dx', "<cmd>lua require('dap').stop()<cr>", { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<leader>ds', "<cmd>lua require('dap').step_over()<cr>",
-                        { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ds', "<cmd>lua require('dap').step_over()<cr>", { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<leader>di', "<cmd>lua require('dap').step_over()<cr>",
-                        { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>di', "<cmd>lua require('dap').step_over()<cr>", { noremap = true, silent = true })
 local dap = require('dap')
 
 dap.adapters.lldb = {
@@ -49,5 +45,5 @@ dap.configurations.cpp = {
 -- If you want to use this for rust and c, add something like this:
 
 dap.configurations.c = dap.configurations.cpp
-dap.configurations.rust = dap.configurations.cpp
+-- dap.configurations.rust = dap.configurations.cpp
 
