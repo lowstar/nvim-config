@@ -143,7 +143,6 @@ local servers = {
 
     tsserver = {
         on_init = function(client)
-            print("tsserver oninit")
             client.resolved_capabilities.document_formatting = false
             client.resolved_capabilities.document_range_formatting = false
         end
