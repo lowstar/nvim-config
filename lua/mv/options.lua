@@ -41,7 +41,7 @@ vim.o.breakindent = true
 vim.o.foldmethod = "marker"
 vim.o.termguicolors = true
 vim.o.undofile = true
-vim.g.mapleader = ','
+vim.g.mapleader = ' '
 
 if vim.fn.executable('rg') then
     vim.o.grepprg = 'rg\\ --no-heading\\ --vimgrep'
