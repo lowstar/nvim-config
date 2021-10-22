@@ -83,7 +83,7 @@ return require('packer').startup(function(use)
     use {
         'rust-lang/rust.vim',
         setup = function()
-            vim.g.rustfmt_autosave = 1
+            vim.g.rustfmt_autosave = 0
         end
     }
 
