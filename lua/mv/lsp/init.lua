@@ -12,7 +12,8 @@ vim.diagnostic.config({
     signs = true,
     underline = true,
     update_in_insert = false,
-    severity_sort = true
+    severity_sort = true,
+    float = { border = "rounded" }
 })
 
 vim.fn.sign_define("DiagnosticSignError",
@@ -37,9 +38,9 @@ local function custom_attach(client, bufnr)
                                 { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'v', '<leader>1', ":<C-U>lua vim.lsp.buf.range_code_action()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dp', "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'd[', "<cmd>lua vim.diagnostic.goto_prev()<cr>",
                                 { noremap = true, silent = true })
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>dn', "<cmd>lua vim.lsp.diagnostic.goto_next()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'd]', "<cmd>lua vim.diagnostic.goto_next()<cr>",
                                 { noremap = true, silent = true })
 
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', "<cmd>lua vim.lsp.buf.definition()<cr>",
@@ -64,7 +65,7 @@ local function custom_attach(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>lS', "<cmd>lua require'mv.telescope'.lsp_workspace_symbols()<cr>",
                                 { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ld',
-                                "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = 'rounded' })<cr>",
+                                "<cmd>lua vim.diagnostic.open_float(0, { scope = 'line' })<cr>",
                                 { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ln', '<cmd>lua vim.lsp.buf.rename()<cr>',
                                 { noremap = true, silent = true })
