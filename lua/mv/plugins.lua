@@ -65,6 +65,8 @@ return require('packer').startup(function(use)
         }
     }
 
+    use { 'folke/trouble.nvim', requires = 'kyazdani42/nvim-web-devicons' }
+
     -- use 'airblade/vim-gitgutter'
     use 'tpope/vim-fugitive'
     use 'tpope/vim-commentary'

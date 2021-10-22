@@ -46,3 +46,5 @@ map('n', '<leader>J', "<cmd>lua require'hop'.hint_char1()<cr>", { noremap = true
 map('v', '<leader>j', "<cmd>lua require'hop'.hint_words()<cr>", { noremap = true, silent = true })
 map('v', '<leader>J', "<cmd>lua require'hop'.hint_char1()<cr>", { noremap = true, silent = true })
 
+-- Trouble
+map('n', '<leader>xx', "<cmd>TroubleToggle<cr>", { noremap = true })
