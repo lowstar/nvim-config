@@ -99,7 +99,7 @@ return require('packer').startup(function(use)
         end
     }
 
-    use 'mhinz/vim-startify'
+    -- use 'mhinz/vim-startify'
     use { "dstein64/vim-startuptime", cmd = "StartupTime" }
 
     use 'rcarriga/nvim-notify'
