@@ -81,10 +81,10 @@ return require('packer').startup(function(use)
     use 'simrat39/rust-tools.nvim'
 
     use {
-        'rust-lang/rust.vim',
-        setup = function()
-            vim.g.rustfmt_autosave = 0
-        end
+        'rust-lang/rust.vim'
+        -- setup = function()
+        --     vim.g.rustfmt_autosave = 0
+        -- end
     }
 
     use {
