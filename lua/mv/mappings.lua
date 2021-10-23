@@ -48,3 +48,7 @@ map('v', '<leader>J', "<cmd>lua require'hop'.hint_char1()<cr>", { noremap = true
 
 -- Trouble
 map('n', '<leader>xx', "<cmd>TroubleToggle<cr>", { noremap = true })
+
+-- nvim-tree
+map('n', '<A-n>', "<cmd>NvimTreeToggle<cr>", { noremap = true, silent = true })
+map('n', '<leader>n', "<cmd>NvimTreeFindFile<cr>", { noremap = true, silent = true })
