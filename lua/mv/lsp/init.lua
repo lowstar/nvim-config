@@ -28,9 +28,11 @@ local function custom_attach(client, bufnr)
 
     vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-    vim.api.nvim_buf_set_keymap(bufnr, 'i', '<C-s>', "<cmd>lua vim.lsp.buf.signature_help()<cr>",
+    vim.api.nvim_buf_set_keymap(bufnr, 'i', '<C-s>', "<C-o><cmd>lua vim.lsp.buf.signature_help()<cr>",
                                 { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-s>', "<cmd>lua vim.lsp.buf.signature_help()<cr>",
+                                { noremap = true, silent = true })
+    vim.api.nvim_buf_set_keymap(bufnr, 's', '<C-s>', "<cmd>lua vim.lsp.buf.signature_help()<cr>",
                                 { noremap = true, silent = true })
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', "<cmd>lua vim.lsp.buf.hover()<cr>", { noremap = true, silent = true })
 
