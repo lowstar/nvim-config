@@ -5,7 +5,12 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
     vim.cmd('packadd packer.nvim')
 end
 
-vim.cmd 'autocmd BufWritePost plugins.lua PackerCompile'
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])
 
 require('packer').init { display = { open_fn = 'new [packer]' } }
 
@@ -27,7 +32,7 @@ return require('packer').startup(function(use)
     use 'ryanoasis/vim-devicons'
     use 'kyazdani42/nvim-web-devicons'
 
-    use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons', opt = true } }
+    use { 'nvim-lualine/lualine.nvim', requires = { 'kyazdani42/nvim-web-devicons' } }
 
     use 'nvim-lua/popup.nvim'
     use 'nvim-lua/plenary.nvim'
