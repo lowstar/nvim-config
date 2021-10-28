@@ -59,7 +59,10 @@ require'nvim-treesitter.configs'.setup {
                 ["ic"] = "@conditional.inner",
 
                 ["aa"] = "@parameter.outer",
-                ["ia"] = "@parameter.inner"
+                ["ia"] = "@parameter.inner",
+
+                ["ab"] = "@block.outer",
+                ["ib"] = "@block.inner"
             }
         }
     }
