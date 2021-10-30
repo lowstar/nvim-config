@@ -47,7 +47,7 @@ cmp.setup.cmdline('/', { sources = { { name = 'buffer' } } })
 ---@diagnostic disable-next-line: undefined-field
 cmp.setup.cmdline(':', { sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } }) })
 
-require('nvim-autopairs').setup()
+require('nvim-autopairs').setup { fast_wrap = {} }
 
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
