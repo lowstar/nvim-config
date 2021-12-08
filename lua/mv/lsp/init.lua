@@ -118,9 +118,6 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
 
-local luaFormat = { formatCommand = "lua-format -i", formatStdin = true }
-local prettier_global = { formatCommand = "prettier --stdin-filepath ${INPUT}", formatStdin = true }
-
 local updated_capabilities = vim.lsp.protocol.make_client_capabilities()
 updated_capabilities = vim.tbl_deep_extend("keep", updated_capabilities, require'lsp-status'.capabilities)
 updated_capabilities.textDocument.codeLens = { dynamicRegistration = false }
@@ -177,22 +174,6 @@ local servers = {
                 telemetry = { enable = false }
             }
         }
-    },
-
-    efm = {
-        init_options = { documentFormatting = true, codeAction = false },
-        root_dir = function(fname)
-            return lspconfig.util.root_pattern(".prettier*")(fname) or
-                       lspconfig.util.root_pattern(".clang-format")(fname) or
-                       lspconfig.util.root_pattern(".rustfmt.toml")(fname) or
-                       lspconfig.util.root_pattern(".git/")(fname) or bufdir
-        end,
-
-        filetypes = { "lua", "javascript", "javascriptreact" },
-        settings = {
-            rootMarkers = { ".git/" },
-            languages = { lua = { luaFormat }, javascript = { prettier_global }, javascriptreact = { prettier_global } }
-        }
     }
 }
 
@@ -242,5 +223,9 @@ require('rust-tools').setup({
     },
     dap = { adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path) }
 })
+
+local null_ls = require('null-ls')
+null_ls.config { sources = { null_ls.builtins.formatting.lua_format, null_ls.builtins.formatting.prettier } }
+setup_server('null-ls', {})
 
 require("trouble").setup()
