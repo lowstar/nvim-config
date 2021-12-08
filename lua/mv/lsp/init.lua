@@ -149,7 +149,10 @@ local servers = {
 
     clangd = {
         cmd = { "clangd", "--background-index", "--query-driver=**/arm-none-eabi*" },
-        root_dir = lspconfig.util.root_pattern("compile_commands.json") or bufdir
+        root_dir = function(fname)
+            return lspconfig.util.root_pattern("compile_commands.json")(fname) or
+                       lspconfig.util.root_pattern(".git")(fname) or bufdir
+        end
     },
 
     sumneko_lua = {
