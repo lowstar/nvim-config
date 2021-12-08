@@ -77,10 +77,12 @@ return require('packer').startup(function(use)
 
     -- use 'airblade/vim-gitgutter'
     use 'tpope/vim-fugitive'
-    use 'tpope/vim-commentary'
+    -- use 'tpope/vim-commentary'
     use 'tpope/vim-surround'
     use 'windwp/nvim-autopairs'
     use 'tommcdo/vim-exchange'
+
+    use 'numToStr/Comment.nvim'
 
     use 'lewis6991/gitsigns.nvim'
 
