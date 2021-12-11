@@ -29,10 +29,6 @@ local my_lualine = {
     }
 }
 
-local my_fileformat = function()
-    return vim.bo.fileformat
-end
-
 local function get_lsp_clients()
     local msg = ''
     local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
@@ -63,24 +59,24 @@ local function my_lsp_status()
     return ''
 end
 
+local sections = {
+    lualine_a = { 'mode' },
+    lualine_b = { 'branch', 'diff', 'diagnostics' },
+    lualine_c = { { 'filename', path = 1 } },
+    lualine_x = {
+        my_lsp_status,
+        { 'fileformat', symbols = { unix = 'unix', dos = 'dos', mac = 'mac' } },
+        'encoding',
+        'filetype'
+    },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' }
+}
+
 require'lualine'.setup({
     options = { theme = my_lualine, section_separators = { '', '' }, component_separators = { '|', '|' } },
-    sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'diff', { 'diagnostics', sources = { 'nvim_lsp' } } },
-        lualine_c = { { 'filename', path = 1 } },
-        lualine_x = { my_lsp_status, my_fileformat, 'encoding', 'filetype' },
-        lualine_y = { 'progress' },
-        lualine_z = { 'location' }
-    },
-    inactive_sections = {
-        lualine_a = { 'mode' },
-        lualine_b = { 'branch', 'diff', { 'diagnostics', sources = { 'nvim_lsp' } } },
-        lualine_c = { { 'filename', path = 1 } },
-        lualine_x = { my_lsp_status, my_fileformat, 'encoding', 'filetype' },
-        lualine_y = { 'progress' },
-        lualine_z = { 'location' }
-    },
-    extensions = { 'fugitive' }
+    sections = sections,
+    inactive_sections = sections,
+    extensions = { 'fugitive', 'nvim-tree', 'quickfix' }
 })
 
