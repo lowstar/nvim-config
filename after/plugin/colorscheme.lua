@@ -27,6 +27,8 @@ function _G.tweak_colors()
     vim.cmd('highlight! link NotifyTRACEBorder DiagnosticHint')
     vim.cmd('highlight! link NotifyTRACEIcon NotifyTRACEBorder')
     vim.cmd('highlight! link NotifyTRACETitle NotifyTRACEBorder')
+    vim.cmd('highlight! link TSNodeKey HopNextKey')
+    vim.cmd('highlight! link TSNodeUnmatched HopUnmatched')
 
     if vim.g.colors_name:find("^base16") ~= nil then
         vim.fn.Base16hi('NonText', vim.g.base16_gui02, '', vim.g.base16_cterm03, '', '', '')
@@ -34,7 +36,7 @@ function _G.tweak_colors()
         vim.fn.Base16hi('HopNextKey', vim.g.base16_gui0C, '', '', '', '', '')
         vim.fn.Base16hi('HopNextKey1', vim.g.base16_gui0C, '', '', '', '', '')
         vim.fn.Base16hi('HopNextKey2', vim.g.base16_gui0D, '', '', '', '', '')
-        vim.fn.Base16hi('HopUnmatched', vim.g.base16_gui02, '', '', '', '', '')
+        vim.fn.Base16hi('HopUnmatched', vim.g.base16_gui03, '', '', '', '', '')
         vim.fn.Base16hi('Comment', vim.g.base16_gui03, '', vim.g.base16_cterm08, '', 'italic', 'italic')
 
         vim.fn.Base16hi("DiagnosticError", vim.g.base16_gui08, '', '', '', '', '')
