@@ -21,17 +21,16 @@ cmp.setup {
 
     formatting = {
         format = require'lspkind'.cmp_format {
-            menu = { buffer = "BUFFER", nvim_lua = "LUA", nvim_lsp = "LSP", path = "PATH", luasnip = "LUASNIP" }
-            -- menu = { buffer = "[BUFFER]", nvim_lua = "[LUA]", nvim_lsp = "[LSP]", path = "[PATH]", luasnip = "[LUASNIP]" }
+            menu = { buffer = "[BUF]", nvim_lua = "[LUA]", nvim_lsp = "[LSP]", path = "[PATH]", luasnip = "[SNIP]" }
         }
     },
 
     sources = cmp.config.sources({
         { name = "nvim_lua" },
-        { name = "nvim_lsp", priority = 10 },
+        { name = "nvim_lsp" },
         { name = "path" },
-        { name = "buffer", priority = 2, keyword_length = 5, max_item_count = 5 },
-        { name = "luasnip" }
+        { name = "luasnip" },
+        { name = "buffer", keyword_length = 5 }
     }),
 
     documentation = { border = 'rounded' },
@@ -41,11 +40,14 @@ cmp.setup {
 
 -- Use buffer source for `/`.
 ---@diagnostic disable-next-line: undefined-field
-cmp.setup.cmdline('/', { sources = { { name = 'buffer' } } })
+cmp.setup.cmdline('/', { completion = { autocomplete = false }, sources = cmp.config.sources({ { name = 'buffer' } }) })
 
 -- Use cmdline & path source for ':'.
 ---@diagnostic disable-next-line: undefined-field
-cmp.setup.cmdline(':', { sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline' } }) })
+cmp.setup.cmdline(':', {
+    completion = { autocomplete = false },
+    sources = cmp.config.sources({ { name = 'path' } }, { { name = 'cmdline', keyword_length = 4 } })
+})
 
 require('nvim-autopairs').setup { fast_wrap = {} }
 
