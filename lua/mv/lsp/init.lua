@@ -148,9 +148,10 @@ local servers = {
     },
 
     clangd = {
-        cmd = { "clangd", "--background-index", "--query-driver=**/arm-none-eabi*" },
+        cmd = { "clangd", "--background-index", "--query-driver=**/arm-none-eabi*,**/gcc*,**/g++*" },
         root_dir = function(fname)
-            return lspconfig.util.root_pattern("compile_commands.json")(fname) or
+            return lspconfig.util.root_pattern("compile_flags.txt")(fname) or
+                       lspconfig.util.root_pattern("compile_commands.json")(fname) or
                        lspconfig.util.root_pattern(".git")(fname) or bufdir
         end
     },
