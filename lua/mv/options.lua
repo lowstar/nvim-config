@@ -43,6 +43,8 @@ vim.o.termguicolors = true
 vim.o.undofile = true
 vim.g.mapleader = ' '
 
+vim.o.mouse = 'a'
+
 if vim.fn.executable('rg') then
     vim.o.grepprg = 'rg\\ --no-heading\\ --vimgrep'
     vim.o.grepformat = '%f:%l:%c:%m'
