@@ -10,10 +10,8 @@ require('telescope').setup {
                 ["<esc>"] = actions.close,
                 ["<C-h>"] = require"telescope".extensions.hop.hop,
                 ["<C-space>"] = function(prompt_bufnr)
-                    local opts = {
-                        callback = actions.toggle_selection,
-                        loop_callback = actions.send_selected_to_qflist
-                    }
+                    local opts =
+                        { callback = actions.toggle_selection, loop_callback = actions.send_selected_to_qflist }
                     require("telescope").extensions.hop._hop_loop(prompt_bufnr, opts)
                 end
             }
@@ -52,12 +50,8 @@ require('telescope').setup {
         -- live_grep = { theme = "ivy" }
     },
     extensions = {
-        fzf = {
-            fuzzy = true,
-            override_generic_sorter = false,
-            override_file_sorter = true,
-            case_mode = 'smart_case'
-        },
+        ["ui-select"] = { require('telescope.themes').get_dropdown() },
+        fzf = { fuzzy = true, override_generic_sorter = false, override_file_sorter = true, case_mode = 'smart_case' },
         hop = {
             -- keys define your hop keys in order; defaults to roughly lower- and uppercased home row
             -- shown keys here are only subset of defaults!
@@ -82,6 +76,7 @@ require('telescope').setup {
 
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('hop')
+require('telescope').load_extension('ui-select')
 
 local M = {}
 
