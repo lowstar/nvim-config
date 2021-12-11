@@ -64,8 +64,8 @@ augroup END
 vim.o.background = 'dark'
 vim.cmd('colorscheme base16-tomorrow-night')
 
--- vim.o.guicursor = 'n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20'
+vim.o.guicursor = 'n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20'
 
-vim.o.guicursor = 'n-v-c-sm:block-blinkwait175-blinkoff150-blinkon175,' ..
-                      'i-ci-ve:ver25-blinkwait175-blinkoff150-blinkon175,' ..
-                      'r-cr-o:hor20-blinkwait175-blinkoff150-blinkon175'
+-- vim.o.guicursor = 'n-v-c-sm:block-blinkwait175-blinkoff150-blinkon175,' ..
+--                       'i-ci-ve:ver25-blinkwait175-blinkoff150-blinkon175,' ..
+--                       'r-cr-o:hor20-blinkwait175-blinkoff150-blinkon175'
