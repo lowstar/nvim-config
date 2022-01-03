@@ -25,9 +25,6 @@ map('c', '<c-e>', '<end>', { noremap = true })
 map('n', '<leader>.', ':bn<cr>', { noremap = true, silent = true })
 map('n', '<leader>,', ':bp<cr>', { noremap = true, silent = true })
 
-map('n', '<leader>ev', ':ed $MYVIMRC<cr>', { noremap = true, silent = true })
-map('n', '<leader>sv', ':luafile $MYVIMRC<cr>', { noremap = true, silent = true })
-
 -- Telescope
 map('n', '<leader>o', "<cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>",
     { noremap = true, silent = true })
