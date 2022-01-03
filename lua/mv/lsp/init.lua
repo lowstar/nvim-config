@@ -228,8 +228,11 @@ require('rust-tools').setup({
     dap = { adapter = require('rust-tools.dap').get_codelldb_adapter(codelldb_path, liblldb_path) }
 })
 
-local null_ls = require('null-ls')
-null_ls.config { sources = { null_ls.builtins.formatting.lua_format, null_ls.builtins.formatting.prettier } }
-setup_server('null-ls', {})
+local null_ls = require("null-ls")
+
+null_ls.setup({
+    on_attach = custom_attach,
+    sources = { null_ls.builtins.formatting.stylua, null_ls.builtins.formatting.prettier },
+})
 
 require("trouble").setup()
