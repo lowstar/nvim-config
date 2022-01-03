@@ -1,7 +1,7 @@
-vim.o.ts = 4
-vim.o.sw = 4
-vim.o.sts = 4
-vim.o.expandtab = true
+vim.o.ts = 8
+vim.o.sw = 8
+vim.o.sts = 8
+vim.o.expandtab = false
 vim.o.smartindent = true
 vim.o.wrap = false
 vim.o.hidden = true
