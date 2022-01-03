@@ -1,7 +1,7 @@
-require'nvim-treesitter.configs'.setup {
-    ensure_installed = 'maintained',
+require("nvim-treesitter.configs").setup({
+    ensure_installed = "maintained",
     highlight = {
-        enable = true -- false will disable the whole extension
+        enable = true, -- false will disable the whole extension
     },
     incremental_selection = {
         enable = true,
@@ -9,12 +9,12 @@ require'nvim-treesitter.configs'.setup {
             init_selection = "<M-w>",
             node_incremental = "<M-w>",
             scope_incremental = "<M-e>",
-            node_decremental = "<M-C-w>"
+            node_decremental = "<M-C-w>",
             -- init_selection = "gnn",
             -- node_incremental = "grn",
             -- scope_incremental = "grc",
             -- node_decremental = "grm",
-        }
+        },
     },
     indent = { enable = false },
     context_commentstring = { enable = true, enable_autocmd = false },
@@ -23,7 +23,7 @@ require'nvim-treesitter.configs'.setup {
     playground = {
         enable = true,
         disable = {},
-        updatetime = 25 -- Debounced time for highlighting nodes in the playground from source code
+        updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
     },
     refactor = {
         highlight_definitions = { enable = true },
@@ -35,9 +35,9 @@ require'nvim-treesitter.configs'.setup {
                 list_definitions = "gnD",
                 list_definitions_toc = "gO",
                 goto_next_usage = "<a-*>",
-                goto_previous_usage = "<a-#>"
-            }
-        }
+                goto_previous_usage = "<a-#>",
+            },
+        },
     },
     textobjects = {
         move = {
@@ -47,7 +47,7 @@ require'nvim-treesitter.configs'.setup {
             goto_next_start = { ["]m"] = "@function.outer", ["]]"] = "@class.outer" },
             goto_next_end = { ["]M"] = "@function.outer", ["]["] = "@class.outer" },
             goto_previous_start = { ["[m"] = "@function.outer", ["[["] = "@class.outer" },
-            goto_previous_end = { ["[M"] = "@function.outer", ["[]"] = "@class.outer" }
+            goto_previous_end = { ["[M"] = "@function.outer", ["[]"] = "@class.outer" },
         },
         select = {
             enable = true,
@@ -62,9 +62,8 @@ require'nvim-treesitter.configs'.setup {
                 ["ia"] = "@parameter.inner",
 
                 ["ab"] = "@block.outer",
-                ["ib"] = "@block.inner"
-            }
-        }
-    }
-}
-
+                ["ib"] = "@block.inner",
+            },
+        },
+    },
+})

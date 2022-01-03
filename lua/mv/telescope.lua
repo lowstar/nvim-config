@@ -1,20 +1,22 @@
 local actions = require("telescope.actions")
 
-require('telescope').setup {
+require("telescope").setup({
     defaults = {
-        prompt_prefix = '❯ ',
-        selection_caret = '❯ ',
+        prompt_prefix = "❯ ",
+        selection_caret = "❯ ",
 
         mappings = {
             i = {
                 ["<esc>"] = actions.close,
-                ["<C-h>"] = require"telescope".extensions.hop.hop,
+                ["<C-h>"] = require("telescope").extensions.hop.hop,
                 ["<C-space>"] = function(prompt_bufnr)
-                    local opts =
-                        { callback = actions.toggle_selection, loop_callback = actions.send_selected_to_qflist }
+                    local opts = {
+                        callback = actions.toggle_selection,
+                        loop_callback = actions.send_selected_to_qflist,
+                    }
                     require("telescope").extensions.hop._hop_loop(prompt_bufnr, opts)
-                end
-            }
+                end,
+            },
         },
 
         layout_config = {
@@ -31,11 +33,11 @@ require('telescope').setup {
                     else
                         return math.floor(cols * 0.6)
                     end
-                end
-            }
+                end,
+            },
         },
 
-        file_ignore_patterns = { "node_modules", "target", ".git", ".vscode" }
+        file_ignore_patterns = { "node_modules", "target", ".git", ".vscode" },
     },
     pickers = {
         find_files = { theme = "ivy" },
@@ -43,15 +45,15 @@ require('telescope').setup {
         buffers = {
             mappings = {
                 i = { ["<c-d>"] = require("telescope.actions").delete_buffer },
-                n = { ["<c-d>"] = require("telescope.actions").delete_buffer }
-            }
+                n = { ["<c-d>"] = require("telescope.actions").delete_buffer },
+            },
             -- theme = "ivy"
-        }
+        },
         -- live_grep = { theme = "ivy" }
     },
     extensions = {
-        ["ui-select"] = { require('telescope.themes').get_dropdown() },
-        fzf = { fuzzy = true, override_generic_sorter = false, override_file_sorter = true, case_mode = 'smart_case' },
+        ["ui-select"] = { require("telescope.themes").get_dropdown() },
+        fzf = { fuzzy = true, override_generic_sorter = false, override_file_sorter = true, case_mode = "smart_case" },
         hop = {
             -- keys define your hop keys in order; defaults to roughly lower- and uppercased home row
             -- shown keys here are only subset of defaults!
@@ -69,69 +71,68 @@ require('telescope').setup {
             -- note: mutually exclusive with `clear_selection_hl`
             trace_entry = true,
             -- jump to entry where hoop loop was started from
-            reset_selection = true
-        }
-    }
-}
+            reset_selection = true,
+        },
+    },
+})
 
-require('telescope').load_extension('fzf')
-require('telescope').load_extension('hop')
-require('telescope').load_extension('ui-select')
+require("telescope").load_extension("fzf")
+require("telescope").load_extension("hop")
+require("telescope").load_extension("ui-select")
 
 local M = {}
 
 function M.files_config_nvim()
-    require('telescope.builtin').find_files {
+    require("telescope.builtin").find_files({
         prompt_title = "~ NVIM dotfiles ~",
         shorten_path = false,
-        cwd = vim.fn.stdpath('config')
-    }
+        cwd = vim.fn.stdpath("config"),
+    })
 end
 
 function M.lsp_implementations()
-    require("telescope.builtin").lsp_implementations {
+    require("telescope.builtin").lsp_implementations({
         layout_strategy = "vertical",
         layout_config = { prompt_position = "top" },
         sorting_strategy = "ascending",
-        ignore_filename = false
-    }
+        ignore_filename = false,
+    })
 end
 
 function M.lsp_references()
-    require("telescope.builtin").lsp_references {
+    require("telescope.builtin").lsp_references({
         layout_strategy = "vertical",
         layout_config = { prompt_position = "top" },
         sorting_strategy = "ascending",
-        ignore_filename = false
-    }
+        ignore_filename = false,
+    })
 end
 
 function M.lsp_document_diagnostics()
-    require("telescope.builtin").lsp_document_diagnostics {
+    require("telescope.builtin").lsp_document_diagnostics({
         layout_strategy = "vertical",
         layout_config = { prompt_position = "top" },
         sorting_strategy = "ascending",
-        ignore_filename = false
-    }
+        ignore_filename = false,
+    })
 end
 
 function M.lsp_document_symbols()
-    require("telescope.builtin").lsp_document_symbols {
+    require("telescope.builtin").lsp_document_symbols({
         layout_strategy = "vertical",
         layout_config = { prompt_position = "top" },
         sorting_strategy = "ascending",
-        ignore_filename = false
-    }
+        ignore_filename = false,
+    })
 end
 
 function M.lsp_workspace_symbols()
-    require("telescope.builtin").lsp_workspace_symbols {
+    require("telescope.builtin").lsp_workspace_symbols({
         layout_strategy = "vertical",
         layout_config = { prompt_position = "top" },
         sorting_strategy = "ascending",
-        ignore_filename = false
-    }
+        ignore_filename = false,
+    })
 end
 
 return M
-
