@@ -47,7 +47,7 @@ vim.keymap.set("n", "<leader>v", function()
 end, { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>f", function()
-    return require("telescope.builtin").file_browser()
+    return require 'telescope'.extensions.file_browser.file_browser()
 end, { noremap = true, silent = true })
 
 -- Hop

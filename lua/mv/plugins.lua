@@ -50,6 +50,7 @@ return require("packer").startup(function(use)
     use("nvim-telescope/telescope-symbols.nvim")
     use("nvim-telescope/telescope-hop.nvim")
     use("nvim-telescope/telescope-ui-select.nvim")
+    use("nvim-telescope/telescope-file-browser.nvim")
 
     use("neovim/nvim-lspconfig")
     use("onsails/lspkind-nvim")

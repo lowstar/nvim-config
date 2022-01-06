@@ -73,12 +73,16 @@ require("telescope").setup({
             -- jump to entry where hoop loop was started from
             reset_selection = true,
         },
+        file_browser = {
+            theme = "ivy",
+        },
     },
 })
 
 require("telescope").load_extension("fzf")
 require("telescope").load_extension("hop")
 require("telescope").load_extension("ui-select")
+require("telescope").load_extension("file_browser")
 
 local M = {}
 
