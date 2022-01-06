@@ -321,8 +321,35 @@ require("rust-tools").setup({
 local null_ls = require("null-ls")
 
 null_ls.setup({
-    on_attach = custom_attach,
-    sources = { null_ls.builtins.formatting.stylua, null_ls.builtins.formatting.prettier },
+    on_attach = function(client, bufnr)
+        -- We do only formatting via null-ls for now
+        if client.resolved_capabilities.document_formatting then
+            vim.api.nvim_buf_set_keymap(
+                bufnr,
+                "n",
+                "<leader>lf",
+                "<cmd>lua vim.lsp.buf.formatting()<cr>",
+                { noremap = true, silent = true }
+            )
+        end
+
+        if client.resolved_capabilities.document_range_formatting then
+            vim.api.nvim_buf_set_keymap(
+                bufnr,
+                "v",
+                "<leader>lf",
+                ":<C-u>lua vim.lsp.buf.range_formatting()<cr>",
+                { noremap = true, silent = true }
+            )
+        end
+    end,
+
+    -- on_attach = custom_attach,
+    sources = {
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.formatting.black,
+    },
 })
 
 require("trouble").setup()
