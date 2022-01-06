@@ -244,7 +244,9 @@ local servers = {
         end,
     },
 
-    clangd = { cmd = { "clangd", "--background-index", "--query-driver=**/arm-none-eabi*,**/gcc*,**/g++*" } },
+    clangd = {
+        cmd = { "clangd", "--background-index", "--query-driver=**/arm-none-eabi*,**/gcc*,**/g++*" },
+    },
 
     sumneko_lua = {
         -- cmd = { sumneko_binary, '-E', sumneko_root_path .. '/main.lua' },
