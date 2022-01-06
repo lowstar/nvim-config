@@ -1,61 +1,75 @@
-local map = vim.api.nvim_set_keymap
-
-map("i", "<C-j>", "<Esc>", { noremap = true })
-map("v", "<C-j>", "<Esc>", { noremap = true })
+vim.keymap.set("i", "<C-j>", "<Esc>", { noremap = true })
+vim.keymap.set("v", "<C-j>", "<Esc>", { noremap = true })
 
 -- Better window navigation
-map("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
-map("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
-map("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
-map("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 
 -- Better indenting
-map("v", "<", "<gv", { noremap = true, silent = true })
-map("v", ">", ">gv", { noremap = true, silent = true })
+vim.keymap.set("v", "<", "<gv", { noremap = true, silent = true })
+vim.keymap.set("v", ">", ">gv", { noremap = true, silent = true })
 
 -- Keep search matches in the center of the window
-map("n", "n", "nzzzv", { noremap = true })
-map("n", "N", "Nzzzv", { noremap = true })
-map("n", "*", "*zzzv", { noremap = true })
+vim.keymap.set("n", "n", "nzzzv", { noremap = true })
+vim.keymap.set("n", "N", "Nzzzv", { noremap = true })
+vim.keymap.set("n", "*", "*zzzv", { noremap = true })
 
-map("", "<leader>z", ":noh<cr>:call clearmatches()<cr>", { noremap = true, silent = true })
+vim.keymap.set("", "<leader>z", ":noh<cr>:call clearmatches()<cr>", { noremap = true, silent = true })
 
 -- Select the contents of current line, excluding indentation
-map("n", "vv", "^vg_", { noremap = true })
+vim.keymap.set("n", "vv", "^vg_", { noremap = true })
 
 -- Emacs bindings in command line mode
-map("c", "<c-a>", "<home>", { noremap = true })
-map("c", "<c-e>", "<end>", { noremap = true })
+vim.keymap.set("c", "<c-a>", "<home>", { noremap = true })
+vim.keymap.set("c", "<c-e>", "<end>", { noremap = true })
 
 -- Buffers
-map("n", "<leader>.", ":bn<cr>", { noremap = true, silent = true })
-map("n", "<leader>,", ":bp<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>.", ":bn<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>,", ":bp<cr>", { noremap = true, silent = true })
 
 -- Telescope
-map(
-    "n",
-    "<leader>o",
-    "<cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>",
-    { noremap = true, silent = true }
-)
+vim.keymap.set("n", "<leader>o", function()
+    return require("telescope.builtin").find_files({ hidden = true })
+end, { noremap = true, silent = true })
 
-map("n", "<leader>b", "<cmd>lua require('telescope.builtin').buffers()<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>b", function()
+    return require("telescope.builtin").buffers()
+end, { noremap = true, silent = true })
 
-map("n", "<leader>g", "<cmd>lua require('telescope.builtin').live_grep()<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>g", function()
+    return require("telescope.builtin").live_grep()
+end, { noremap = true, silent = true })
 
-map("n", "<leader>v", "<cmd>lua require('mv.telescope').files_config_nvim()<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>v", function()
+    return require("mv.telescope").files_config_nvim()
+end, { noremap = true, silent = true })
 
-map("n", "<leader>f", "<cmd>lua require('telescope.builtin').file_browser()<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>f", function()
+    return require("telescope.builtin").file_browser()
+end, { noremap = true, silent = true })
 
 -- Hop
-map("n", "<leader>j", "<cmd>lua require'hop'.hint_words()<cr>", { noremap = true, silent = true })
-map("n", "<leader>J", "<cmd>lua require'hop'.hint_char1()<cr>", { noremap = true, silent = true })
-map("v", "<leader>j", "<cmd>lua require'hop'.hint_words()<cr>", { noremap = true, silent = true })
-map("v", "<leader>J", "<cmd>lua require'hop'.hint_char1()<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>j", function()
+    return require("hop").hint_words()
+end, { noremap = true, silent = true })
+
+vim.keymap.set("n", "<leader>J", function()
+    return require("hop").hint_char1()
+end, { noremap = true, silent = true })
+
+vim.keymap.set("v", "<leader>j", function()
+    return require("hop").hint_words()
+end, { noremap = true, silent = true })
+
+vim.keymap.set("v", "<leader>J", function()
+    return require("hop").hint_char1()
+end, { noremap = true, silent = true })
 
 -- Trouble
-map("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { noremap = true })
+vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { noremap = true })
 
 -- nvim-tree
-map("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { noremap = true, silent = true })
-map("n", "<leader>n", "<cmd>NvimTreeFindFile<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>n", "<cmd>NvimTreeFindFile<cr>", { noremap = true, silent = true })
