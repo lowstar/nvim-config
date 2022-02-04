@@ -128,5 +128,4 @@ return require("packer").startup(function(use)
     })
 
     use("dhruvasagar/vim-table-mode")
-    use("akinsho/toggleterm.nvim")
 end)
