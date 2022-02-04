@@ -41,7 +41,7 @@ vim.o.breakindent = true
 vim.o.foldmethod = "marker"
 vim.o.termguicolors = true
 vim.o.undofile = true
-vim.g.mapleader = ' '
+vim.g.mapleader = ','
 
 vim.o.mouse = 'a'
 
