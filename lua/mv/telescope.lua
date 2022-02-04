@@ -1,4 +1,5 @@
 local actions = require("telescope.actions")
+local fb_actions = require('telescope').extensions.file_browser.actions
 
 require("telescope").setup({
     defaults = {
@@ -75,6 +76,11 @@ require("telescope").setup({
         },
         file_browser = {
             theme = "ivy",
+            mappings = {
+                ["i"] = {
+                    ["~"] = fb_actions.goto_home_dir
+                }
+            }
         },
     },
 })
