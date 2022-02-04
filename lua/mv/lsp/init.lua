@@ -226,6 +226,7 @@ local servers = {
     html = true,
     cssls = true,
     eslint = true,
+    solargraph = true,
 
     jsonls = {
         commands = {
