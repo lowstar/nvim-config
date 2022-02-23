@@ -28,6 +28,7 @@ return require("packer").startup(function(use)
 
     use({
         "airblade/vim-rooter",
+        disable = true,
         config = function()
             vim.g.rooter_patterns = { ".git", "Makefile", "package.json", "Cargo.toml", "pom.xml" }
         end,
