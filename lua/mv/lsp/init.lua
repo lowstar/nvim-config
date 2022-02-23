@@ -305,22 +305,27 @@ local codelldb_path = extension_path .. "adapter/codelldb"
 local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
 
 require("rust-tools").setup({
-    tools = { inlay_hints = { highlight = "InlayHint" }, hover_actions = { auto_focus = true } },
+    tools = {
+        inlay_hints = {
+            highlight = "InlayHint",
+            show_variable_name = true,
+            parameter_hints_prefix = "❮-",
+            other_hints_prefix = "=❯",
+        },
+        hover_actions = { auto_focus = true },
+    },
     server = {
-        -- flags = { allow_incremental_sync = true, debounce_text_changes = 150 },
-        -- capabilities = updated_capabilities,
         on_attach = function(client, bufnr)
             custom_attach(client, bufnr)
             vim.api.nvim_buf_set_keymap(bufnr, "v", "K", ":<C-U>RustHoverRange<cr>", { noremap = true, silent = true })
         end,
-        -- settings = {
-        --     ["rust-analyzer"] = {
-        --         assist = { importMergeBehavior = "last", importPrefix = "by_self" },
-        --         cargo = { loadOutDirsFromCheck = true },
-        --         procMacro = { enable = true },
-        --         rustfmt = { enableRangeFormatting = true }
-        --     }
-        -- }
+        settings = {
+            ["rust-analyzer"] = {
+                checkOnSave = { allTargets = false },
+                assist = { importGranularity = "module", importPrefix = "by_crate" },
+            },
+        },
+        standalone = false,
     },
     dap = { adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path) },
 })
