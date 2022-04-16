@@ -309,8 +309,6 @@ require("rust-tools").setup({
         inlay_hints = {
             highlight = "InlayHint",
             show_variable_name = true,
-            parameter_hints_prefix = "❮-",
-            other_hints_prefix = "=❯",
         },
         hover_actions = { auto_focus = true },
     },
