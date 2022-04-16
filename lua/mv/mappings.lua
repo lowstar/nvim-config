@@ -55,16 +55,8 @@ vim.keymap.set("n", "<leader>j", function()
     return require("hop").hint_words()
 end, { noremap = true, silent = true })
 
-vim.keymap.set("n", "<leader>J", function()
-    return require("hop").hint_char1()
-end, { noremap = true, silent = true })
-
-vim.keymap.set("v", "<leader>j", function()
-    return require("hop").hint_words()
-end, { noremap = true, silent = true })
-
-vim.keymap.set("v", "<leader>J", function()
-    return require("hop").hint_char1()
+vim.keymap.set("n", "<leader>m", function()
+    return require("hop").hint_lines()
 end, { noremap = true, silent = true })
 
 -- Trouble
