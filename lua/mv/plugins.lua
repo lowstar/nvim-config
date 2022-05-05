@@ -122,10 +122,10 @@ return require("packer").startup(function(use)
 
     use("rcarriga/nvim-notify")
 
-    use({
-        "kyazdani42/nvim-tree.lua",
-        requires = "kyazdani42/nvim-web-devicons",
-    })
+    -- use({
+    --     "kyazdani42/nvim-tree.lua",
+    --     requires = "kyazdani42/nvim-web-devicons",
+    -- })
 
     use("dhruvasagar/vim-table-mode")
 end)
