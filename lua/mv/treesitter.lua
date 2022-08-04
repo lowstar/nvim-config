@@ -6,6 +6,7 @@ require("nvim-treesitter.configs").setup({
         "cpp",
         "devicetree",
         "fortran",
+        "go",
         "http",
         "html",
         "java",
@@ -13,6 +14,7 @@ require("nvim-treesitter.configs").setup({
         "lua",
         "make",
         "markdown",
+        "org",
         "perl",
         "php",
         "python",
@@ -24,8 +26,11 @@ require("nvim-treesitter.configs").setup({
         "vim",
         "yaml",
     },
+    matchup = { enable = true },
     highlight = {
-        enable = true, -- false will disable the whole extension
+        enable = true,
+        disable = { "org" },
+        additional_vim_regex_highlighting = { "org" },
     },
     incremental_selection = {
         enable = true,

@@ -49,8 +49,14 @@ cmp.setup({
     formatting = {
         format = require("lspkind").cmp_format({
             mode = "symbol_text",
-            maxwidth = 50,
-            menu = { buffer = "[BUF]", nvim_lua = "[LUA]", nvim_lsp = "[LSP]", path = "[PATH]", luasnip = "[SNIP]" },
+            menu = {
+                buffer = "[BUF]",
+                nvim_lua = "[NVIM]",
+                nvim_lsp = "[LSP]",
+                path = "[PATH]",
+                luasnip = "[SNIP]",
+                orgmode = "[ORG]",
+            },
         }),
     },
 
@@ -59,6 +65,7 @@ cmp.setup({
         { name = "nvim_lsp" },
         { name = "path" },
         { name = "luasnip" },
+        { name = "orgmode" },
     }, {
         { name = "buffer" },
     }),
@@ -68,7 +75,7 @@ cmp.setup({
         documentation = cmp.config.window.bordered(),
     },
 
-    experimental = { ghost_text = true },
+    -- experimental = { ghost_text = false, native_menu = false },
 })
 
 require("nvim-autopairs").setup({ fast_wrap = {} })

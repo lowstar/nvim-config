@@ -30,38 +30,24 @@ vim.keymap.set("n", "<leader>.", ":bn<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>,", ":bp<cr>", { noremap = true, silent = true })
 
 -- Telescope
-vim.keymap.set("n", "<leader>o", function()
+vim.keymap.set("n", "<leader>O", function()
     return require("telescope.builtin").find_files({ hidden = true })
 end, { noremap = true, silent = true })
 
-vim.keymap.set("n", "<leader>b", function()
-    return require("telescope.builtin").buffers()
-end, { noremap = true, silent = true })
-
-vim.keymap.set("n", "<leader>g", function()
-    return require("telescope.builtin").live_grep()
-end, { noremap = true, silent = true })
-
-vim.keymap.set("n", "<leader>v", function()
-    return require("mv.telescope").files_config_nvim()
-end, { noremap = true, silent = true })
-
-vim.keymap.set("n", "<leader>f", function()
-    return require 'telescope'.extensions.file_browser.file_browser()
-end, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>b", require("telescope.builtin").buffers, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>g", require("telescope.builtin").live_grep, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>G", require("telescope.builtin").git_files, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>v", require("mv.telescope").files_config_nvim, { noremap = true, silent = true })
+vim.keymap.set(
+    "n",
+    "<leader>f",
+    require("telescope").extensions.file_browser.file_browser,
+    { noremap = true, silent = true }
+)
 
 -- Hop
-vim.keymap.set("n", "<leader>j", function()
-    return require("hop").hint_words()
-end, { noremap = true, silent = true })
-
-vim.keymap.set("n", "<leader>m", function()
-    return require("hop").hint_lines()
-end, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>j", require("hop").hint_words, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>m", require("hop").hint_lines, { noremap = true, silent = true })
 
 -- Trouble
 vim.keymap.set("n", "<leader>xx", "<cmd>TroubleToggle<cr>", { noremap = true })
-
--- nvim-tree
-vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>n", "<cmd>NvimTreeFindFile<cr>", { noremap = true, silent = true })

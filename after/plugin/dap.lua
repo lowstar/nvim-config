@@ -1,30 +1,29 @@
-vim.api.nvim_set_keymap('n', '<leader>db', "<cmd>lua require('dap').toggle_breakpoint()<cr>",
-                        { noremap = true, silent = true })
+local dap = require("dap")
+local dapui = require('dapui')
 
-vim.api.nvim_set_keymap('n', '<leader>dc', "<cmd>lua require('dap').continue()<cr>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>dc", dap.continue, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>dx", dap.stop, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>ds", dap.step_over, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>di", dap.step_over, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>dd", dapui.toggle, { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<leader>dx', "<cmd>lua require('dap').stop()<cr>", { noremap = true, silent = true })
-
-vim.api.nvim_set_keymap('n', '<leader>ds', "<cmd>lua require('dap').step_over()<cr>", { noremap = true, silent = true })
-
-vim.api.nvim_set_keymap('n', '<leader>di', "<cmd>lua require('dap').step_over()<cr>", { noremap = true, silent = true })
-local dap = require('dap')
 
 dap.adapters.lldb = {
-    type = 'executable',
-    command = '/usr/local/opt/llvm/bin/lldb-vscode', -- adjust as needed
-    name = "rt_lldb"
+    type = "executable",
+    command = "/usr/local/opt/llvm/bin/lldb-vscode", -- adjust as needed
+    name = "rt_lldb",
 }
 
 dap.configurations.cpp = {
     {
         name = "Launch",
-        type = "lldb",
+        type = "rt_lldb",
         request = "launch",
         program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
         end,
-        cwd = '${workspaceFolder}',
+        cwd = "${workspaceFolder}",
         stopOnEntry = false,
         args = {},
 
@@ -38,12 +37,15 @@ dap.configurations.cpp = {
         --
         -- But you should be aware of the implications:
         -- https://www.kernel.org/doc/html/latest/admin-guide/LSM/Yama.html
-        runInTerminal = false
-    }
+        runInTerminal = false,
+    },
 }
 
 -- If you want to use this for rust and c, add something like this:
 
 dap.configurations.c = dap.configurations.cpp
--- dap.configurations.rust = dap.configurations.cpp
+dap.configurations.rust = dap.configurations.cpp
+
+require('dap-go').setup()
+dapui.setup()
 

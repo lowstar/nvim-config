@@ -23,7 +23,8 @@ return require("packer").startup(function(use)
 
     use("nanotee/nvim-lua-guide")
 
-    use("chriskempson/base16-vim")
+    -- use("chriskempson/base16-vim")
+    use("base16-project/base16-vim")
     use("machakann/vim-highlightedyank")
 
     use({
@@ -54,7 +55,6 @@ return require("packer").startup(function(use)
     use("onsails/lspkind-nvim")
     use("nvim-lua/lsp_extensions.nvim")
     use("nvim-lua/lsp-status.nvim")
-    use("kosayoda/nvim-lightbulb")
 
     use("jose-elias-alvarez/null-ls.nvim")
 
@@ -93,8 +93,10 @@ return require("packer").startup(function(use)
     use("lewis6991/gitsigns.nvim")
 
     use("mfussenegger/nvim-dap")
+    use("rcarriga/nvim-dap-ui")
+    use("leoluz/nvim-dap-go")
 
-    use("simrat39/rust-tools.nvim")
+    use({ "simrat39/rust-tools.nvim", branch = "modularize_and_inlay_rewrite" })
 
     use({
         "rust-lang/rust.vim",
@@ -128,4 +130,15 @@ return require("packer").startup(function(use)
     -- })
 
     use("dhruvasagar/vim-table-mode")
+
+    use("nvim-orgmode/orgmode")
+
+    use("lvimuser/lsp-inlayhints.nvim")
+
+    use({
+        "moberst/lsp_lines",
+        config = function()
+            require("lsp_lines").setup()
+        end,
+    })
 end)

@@ -6,7 +6,7 @@ vim.o.smartindent = true
 vim.o.wrap = false
 vim.o.hidden = true
 vim.o.modelines = 1
-vim.o.laststatus = 2
+vim.o.laststatus = 3
 vim.o.cmdheight = 1
 vim.o.lazyredraw = true
 vim.o.history = 1000
@@ -38,12 +38,13 @@ vim.o.shortmess = vim.o.shortmess .. "c"
 vim.o.updatetime = 250
 vim.o.equalalways = false
 vim.o.breakindent = true
-vim.o.foldmethod = "marker"
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "nvim_treesitter#folderexp()"
 vim.o.termguicolors = true
 vim.o.undofile = true
 vim.g.mapleader = ','
-
 vim.o.mouse = 'a'
+vim.o.winbar = '%=%m %f'
 
 if vim.fn.executable('rg') then
     vim.o.grepprg = 'rg\\ --no-heading\\ --vimgrep'

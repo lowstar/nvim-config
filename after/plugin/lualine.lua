@@ -1,38 +1,40 @@
+local W = require('mv.utils').W
+
 local my_lualine = {
     inactive = {
-        a = { fg = "#" .. vim.g.base16_gui02, bg = "#" .. vim.g.base16_gui03, gui = "bold" },
-        z = { fg = "#" .. vim.g.base16_gui02, bg = "#" .. vim.g.base16_gui03, gui = "bold" },
+        a = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui03), gui = "bold" },
+        z = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui03), gui = "bold" },
     },
     normal = {
-        a = { fg = "#" .. vim.g.base16_gui02, bg = "#" .. vim.g.base16_gui0D, gui = "bold" },
-        b = { fg = "#" .. vim.g.base16_gui04, bg = "#" .. vim.g.base16_gui02 },
-        c = { fg = "#" .. vim.g.base16_gui03, bg = "#" .. vim.g.base16_gui01 },
-        x = { fg = "#" .. vim.g.base16_gui04, bg = "#" .. vim.g.base16_gui02 },
-        y = { fg = "#" .. vim.g.base16_gui02, bg = "#" .. vim.g.base16_gui03, gui = "bold" },
-        z = { fg = "#" .. vim.g.base16_gui02, bg = "#" .. vim.g.base16_gui0D, gui = "bold" },
+        a = { fg = W(vim.g.base16_gui00), bg = W(vim.g.base16_gui0D), gui = "bold" },
+        b = { fg = W(vim.g.base16_gui04), bg = W(vim.g.base16_gui02) },
+        c = { fg = W(vim.g.base16_gui03), bg = W(vim.g.base16_gui01) },
+        x = { fg = W(vim.g.base16_gui04), bg = W(vim.g.base16_gui02) },
+        y = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui03), gui = "bold" },
+        z = { fg = W(vim.g.base16_gui00), bg = W(vim.g.base16_gui0D), gui = "bold" },
     },
     visual = {
-        a = { fg = "#" .. vim.g.base16_gui02, bg = "#" .. vim.g.base16_gui0E, gui = "bold" },
-        z = { fg = "#" .. vim.g.base16_gui02, bg = "#" .. vim.g.base16_gui0E, gui = "bold" },
+        a = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui0E), gui = "bold" },
+        z = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui0E), gui = "bold" },
     },
     replace = {
-        a = { fg = "#" .. vim.g.base16_gui02, bg = "#" .. vim.g.base16_gui09, gui = "bold" },
-        z = { fg = "#" .. vim.g.base16_gui02, bg = "#" .. vim.g.base16_gui09, gui = "bold" },
+        a = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui09), gui = "bold" },
+        z = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui09), gui = "bold" },
     },
     insert = {
-        a = { fg = "#" .. vim.g.base16_gui02, bg = "#" .. vim.g.base16_gui0B, gui = "bold" },
-        z = { fg = "#" .. vim.g.base16_gui02, bg = "#" .. vim.g.base16_gui0B, gui = "bold" },
+        a = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui0B), gui = "bold" },
+        z = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui0B), gui = "bold" },
     },
     command = {
-        a = { fg = "#" .. vim.g.base16_gui02, bg = "#" .. vim.g.base16_gui08, gui = "bold" },
-        z = { fg = "#" .. vim.g.base16_gui02, bg = "#" .. vim.g.base16_gui08, gui = "bold" },
+        a = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui08), gui = "bold" },
+        z = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui08), gui = "bold" },
     },
 }
 
 local function get_lsp_clients()
     local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
     local clients = vim.lsp.buf_get_clients()
-    if #clients == 0 then
+    if vim.tbl_count(clients) == 0 then
         return ""
     end
 
@@ -48,14 +50,15 @@ local function get_lsp_clients()
 end
 
 local function my_lsp_status()
-    if #vim.lsp.buf_get_clients() > 0 then
-        local content = require("lsp-status").status():match("^%s*(.-)%s*$")
-        if #content == 0 then
-            return get_lsp_clients()
-        end
-        return content
+    if vim.tbl_count(vim.lsp.buf_get_clients()) == 0 then
+        return ""
     end
-    return ""
+
+    local content = require("lsp-status").status():match("^%s*(.-)%s*$")
+    if #content == 0 then
+        return get_lsp_clients()
+    end
+    return content
 end
 
 local sections = {
@@ -64,8 +67,8 @@ local sections = {
     lualine_c = { { "filename", path = 1 } },
     lualine_x = {
         my_lsp_status,
-        { "fileformat", symbols = { unix = "unix", dos = "dos", mac = "mac" } },
         "encoding",
+        { "fileformat", symbols = { unix = "unix", dos = "dos", mac = "mac" } },
         "filetype",
     },
     lualine_y = { "progress" },
@@ -77,9 +80,8 @@ require("lualine").setup({
         theme = my_lualine,
         section_separators = { "", "" },
         component_separators = { "|", "|" },
-        disabled_filetypes = { "NvimTree" },
+        globalstatus = true,
     },
     sections = sections,
-    inactive_sections = sections,
-    extensions = { "fugitive", "nvim-tree", "quickfix" },
+    extensions = { "fugitive", "quickfix" },
 })
