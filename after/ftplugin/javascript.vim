@@ -5,6 +5,6 @@ setl softtabstop=2
 
 augroup js.PreWrite
 au! *  <buffer>
-au BufWritePre <buffer> silent! :lua vim.lsp.buf.formatting_sync(nil, 250)
+au BufWritePre <buffer> silent! :lua vim.lsp.buf.format()
 augroup END
 
