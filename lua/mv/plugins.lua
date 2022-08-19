@@ -96,14 +96,8 @@ return require("packer").startup(function(use)
     use("rcarriga/nvim-dap-ui")
     use("leoluz/nvim-dap-go")
 
-    use({ "simrat39/rust-tools.nvim", branch = "modularize_and_inlay_rewrite" })
-
-    use({
-        "rust-lang/rust.vim",
-        -- setup = function()
-        --     vim.g.rustfmt_autosave = 0
-        -- end
-    })
+    use("simrat39/rust-tools.nvim")
+    use("rust-lang/rust.vim")
 
     use({
         "phaazon/hop.nvim",
