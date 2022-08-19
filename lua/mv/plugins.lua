@@ -128,11 +128,4 @@ return require("packer").startup(function(use)
     use("nvim-orgmode/orgmode")
 
     use("lvimuser/lsp-inlayhints.nvim")
-
-    use({
-        "moberst/lsp_lines",
-        config = function()
-            require("lsp_lines").setup()
-        end,
-    })
 end)
