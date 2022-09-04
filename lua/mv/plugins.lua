@@ -83,8 +83,8 @@ return require("packer").startup(function(use)
 
     use({ "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" })
 
-    use("tpope/vim-fugitive")
-    use("tpope/vim-surround")
+    -- use("tpope/vim-fugitive")
+    -- use("tpope/vim-surround")
     use("machakann/vim-sandwich")
     use("windwp/nvim-autopairs")
     use("tommcdo/vim-exchange")
