@@ -37,7 +37,7 @@ local function custom_attach(client, bufnr)
         vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { buffer = bufnr })
     end
 
-    vim.keymap.set({ "i", "n", "s" }, "<C-s>", vim.lsp.buf.signature_help, { buffer = bufnr })
+    vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, { buffer = bufnr })
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
     vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { buffer = bufnr })
     vim.keymap.set("n", "d[", vim.diagnostic.goto_prev, { buffer = bufnr })
