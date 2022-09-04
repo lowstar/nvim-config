@@ -1,7 +1,10 @@
 local lspconfig = require("lspconfig")
 local lsp_status = require("lsp-status")
+local lspkind = require("lspkind")
+local rust_tools = require("rust-tools")
+local null_ls = require("null-ls")
 
-require("lspkind").init({ mode = "symbol_text" })
+lspkind.init({ mode = "symbol_text" })
 
 lsp_status.config({ indicator_separator = "", component_separator = " ", status_symbol = "", diagnostics = false })
 lsp_status.register_progress()
@@ -10,79 +13,58 @@ vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
 vim.diagnostic.config({
-    virtual_text = true,
+    underline = true,
+    virtual_text = false,
     severity_sort = true,
     float = { border = "rounded" },
 })
 
-vim.fn.sign_define(
-    "DiagnosticSignError",
-    { texthl = "DiagnosticSignError", text = "", numhl = "DiagnosticSignError" }
-)
-vim.fn.sign_define("DiagnosticSignWarn", { texthl = "DiagnosticSignWarn", text = "", numhl = "DiagnosticSignWarn" })
-vim.fn.sign_define("DiagnosticSignInfo", { texthl = "DiagnosticSignInfo", text = "", numhl = "DiagnosticSignInfo" })
-vim.fn.sign_define("DiagnosticSignHint", { texthl = "DiagnosticSignHint", text = "", numhl = "DiagnosticSignHint" })
+vim.fn.sign_define("DiagnosticSignError", {
+    texthl = "DiagnosticSignError",
+    text = "E",
+    numhl = "DiagnosticSignError",
+})
+vim.fn.sign_define("DiagnosticSignWarn", { texthl = "DiagnosticSignWarn", text = "W", numhl = "DiagnosticSignWarn" })
+vim.fn.sign_define("DiagnosticSignInfo", { texthl = "DiagnosticSignInfo", text = "I", numhl = "DiagnosticSignInfo" })
+vim.fn.sign_define("DiagnosticSignHint", { texthl = "DiagnosticSignHint", text = "H", numhl = "DiagnosticSignHint" })
 
 local function custom_attach(client, bufnr)
-    require("lsp-status").on_attach(client)
+    lsp_status.on_attach(client)
 
     vim.api.nvim_buf_set_option(0, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
     if client.supports_method("textDocument/formatting") then
-        vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { noremap = true, silent = true, buffer = bufnr })
+        vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { buffer = bufnr })
     end
 
-    vim.keymap.set(
-        { "i", "n", "s" },
-        "<C-s>",
-        vim.lsp.buf.signature_help,
-        { noremap = true, silent = true, buffer = bufnr }
-    )
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, { noremap = true, silent = true, buffer = bufnr })
-    vim.keymap.set("n", "<leader>1", vim.lsp.buf.code_action, { noremap = true, silent = true, buffer = bufnr })
-    vim.keymap.set("n", "d[", vim.diagnostic.goto_prev, { noremap = true, silent = true, buffer = bufnr })
-    vim.keymap.set("n", "d]", vim.diagnostic.goto_next, { noremap = true, silent = true, buffer = bufnr })
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { noremap = true, silent = true, buffer = bufnr })
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { noremap = true, silent = true, buffer = bufnr })
-    vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { noremap = true, silent = true, buffer = bufnr })
-    vim.keymap.set("n", "gr", require("mv.telescope").lsp_references, {
-        noremap = true,
-        silent = true,
-        buffer = bufnr,
-    })
-    vim.keymap.set(
-        "n",
-        "gI",
-        require("mv.telescope").lsp_implementations,
-        { noremap = true, silent = true, buffer = bufnr }
-    )
-    vim.keymap.set("n", "<leader>lr", vim.lsp.codelens.run, { noremap = true, silent = true, buffer = bufnr })
-    vim.keymap.set(
-        "n",
-        "<leader>lD",
-        require("mv.telescope").lsp_document_diagnostics,
-        { noremap = true, silent = true, buffer = bufnr }
-    )
-    vim.keymap.set(
-        "n",
-        "<leader>ls",
-        require("mv.telescope").lsp_document_symbols,
-        { noremap = true, silent = true, buffer = bufnr }
-    )
-    vim.keymap.set(
-        "n",
-        "<leader>lS",
-        require("mv.telescope").lsp_workspace_symbols,
-        { noremap = true, silent = true, buffer = bufnr }
-    )
+    vim.keymap.set({ "i", "n", "s" }, "<C-s>", vim.lsp.buf.signature_help, { buffer = bufnr })
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
+    vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { buffer = bufnr })
+    vim.keymap.set("n", "d[", vim.diagnostic.goto_prev, { buffer = bufnr })
+    vim.keymap.set("n", "d]", vim.diagnostic.goto_next, { buffer = bufnr })
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = bufnr })
+    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = bufnr })
+    vim.keymap.set("n", "gT", vim.lsp.buf.type_definition, { buffer = bufnr })
+    vim.keymap.set("n", "gr", require("mv.telescope").lsp_references, { buffer = bufnr })
+    vim.keymap.set("n", "gI", require("mv.telescope").lsp_implementations, { buffer = bufnr })
+    vim.keymap.set("n", "<leader>lr", vim.lsp.codelens.run, { buffer = bufnr })
+    vim.keymap.set("n", "<leader>lD", require("mv.telescope").lsp_document_diagnostics, { buffer = bufnr })
+    vim.keymap.set("n", "<leader>ls", require("mv.telescope").lsp_document_symbols, { buffer = bufnr })
+    vim.keymap.set("n", "<leader>lS", require("mv.telescope").lsp_workspace_symbols, { buffer = bufnr })
     vim.keymap.set("n", "<leader>ld", function()
         vim.diagnostic.open_float(0, { scope = "line" })
     end, {
-        noremap = true,
-        silent = true,
         buffer = bufnr,
     })
-    vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, { noremap = true, silent = true, buffer = bufnr })
+
+    vim.api.nvim_create_autocmd({ "CursorHold" }, {
+        buffer = 0,
+        callback = function()
+            vim.diagnostic.open_float(0, { scope = "line" })
+        end,
+    })
+
+    vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, { buffer = bufnr })
 
     if client.server_capabilities.codeLensProvider then
         local aug_codelens = vim.api.nvim_create_augroup("lsp_codelens", { clear = true })
@@ -191,14 +173,14 @@ for server, config in pairs(servers) do
     setup_server(server, config)
 end
 
-local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.7.3/"
-local codelldb_path = extension_path .. "adapter/codelldb"
-local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
+-- local extension_path = vim.env.HOME .. "/.vscode/extensions/vadimcn.vscode-lldb-1.7.3/"
+-- local codelldb_path = extension_path .. "adapter/codelldb"
+-- local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
 
-require("rust-tools").setup({
+rust_tools.setup({
     tools = {
-        autoSetHints = false,
         inlay_hints = {
+            auto = false,
             highlight = "InlayHint",
         },
         hover_actions = { auto_focus = true },
@@ -206,7 +188,7 @@ require("rust-tools").setup({
     server = {
         on_attach = function(client, bufnr)
             custom_attach(client, bufnr)
-            vim.api.nvim_buf_set_keymap(bufnr, "v", "K", ":<C-U>RustHoverRange<cr>", { noremap = true, silent = true })
+            vim.keymap.set("v", "K", rust_tools.hover_range.hover_range, { buffer = bufnr })
         end,
         settings = {
             ["rust-analyzer"] = {
@@ -216,10 +198,8 @@ require("rust-tools").setup({
         },
         standalone = false,
     },
-    dap = { adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path) },
+    -- dap = { adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path) },
 })
-
-local null_ls = require("null-ls")
 
 null_ls.setup({
     on_attach = custom_attach,
@@ -231,4 +211,17 @@ null_ls.setup({
     },
 })
 
-require("trouble").setup()
+require("trouble").setup({
+    icons = false,
+    fold_open = "v", -- icon used for open folds
+    fold_closed = ">", -- icon used for closed folds
+    indent_lines = false, -- add an indent guide below the fold icons
+    signs = {
+        -- icons / text used for a diagnostic
+        error = "E",
+        warning = "W",
+        hint = "H",
+        information = "I",
+    },
+    use_diagnostic_signs = false, -- enabling this will use the signs defined in your lsp client
+})
