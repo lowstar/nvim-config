@@ -59,6 +59,7 @@ return require("packer").startup(function(use)
     use("jose-elias-alvarez/null-ls.nvim")
 
     use("nvim-treesitter/nvim-treesitter")
+    use("nvim-treesitter/nvim-treesitter-context")
     use("nvim-treesitter/nvim-treesitter-refactor")
     use("nvim-treesitter/nvim-treesitter-textobjects")
     use("nvim-treesitter/playground")
