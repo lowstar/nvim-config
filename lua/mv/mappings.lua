@@ -16,6 +16,9 @@ vim.keymap.set("n", "n", "nzzzv", { noremap = true })
 vim.keymap.set("n", "N", "Nzzzv", { noremap = true })
 vim.keymap.set("n", "*", "*zzzv", { noremap = true })
 
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = true })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = true })
+
 vim.keymap.set("", "<leader>z", ":noh<cr>:call clearmatches()<cr>", { noremap = true, silent = true })
 
 -- Select the contents of current line, excluding indentation
