@@ -1,5 +1,9 @@
-local dap = require("dap")
-local dapui = require('dapui')
+local status_ok, dap = pcall(require, "dap")
+if not status_ok then
+    return
+end
+
+local dapui = require("dapui")
 
 vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>dc", dap.continue, { noremap = true, silent = true })
@@ -46,6 +50,5 @@ dap.configurations.cpp = {
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
 
-require('dap-go').setup()
+require("dap-go").setup()
 dapui.setup()
-
