@@ -59,18 +59,20 @@ local function custom_attach(client, bufnr)
 
     vim.api.nvim_create_autocmd({ "CursorHold" }, {
         buffer = 0,
-        callback = function()
-            vim.diagnostic.open_float(0, { scope = "line" })
-        end,
+        group = vim.api.nvim_create_augroup("lsp_diagnostic", { clear = true }),
+        callback = vim.diagnostic.open_float,
     })
 
     vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, { buffer = bufnr })
 
     if client.server_capabilities.codeLensProvider then
-        local aug_codelens = vim.api.nvim_create_augroup("lsp_codelens", { clear = true })
         vim.api.nvim_create_autocmd(
             { "BufEnter", "CursorHold", "InsertLeave" },
-            { buffer = 0, group = aug_codelens, callback = vim.lsp.codelens.refresh }
+            {
+                buffer = 0,
+                group = vim.api.nvim_create_augroup("lsp_codelens", { clear = true }),
+                callback = vim.lsp.codelens.refresh,
+            }
         )
     end
 end
