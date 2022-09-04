@@ -1,4 +1,4 @@
-local W = require('mv.utils').W
+local W = require("mv.utils").W
 
 local my_lualine = {
     inactive = {
