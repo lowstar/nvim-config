@@ -35,8 +35,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
         if vim.g.colors_name:find("^base16") ~= nil then
             vim.api.nvim_set_hl(0, "InlayHint", { fg = W(vim.g.base16_gui04), bg = W(vim.g.base16_gui01), italic = true })
 
+            vim.api.nvim_set_hl(0, "Whitespace", { fg = W(vim.g.base16_gui02), italic = true })
             vim.api.nvim_set_hl(0, "NonText", { fg = W(vim.g.base16_gui02), italic = true })
-            vim.api.nvim_set_hl(0, "StartifyPath", { fg = W(vim.g.base16_gui04) })
             vim.api.nvim_set_hl(0, "HopNextKey", { fg = W(vim.g.base16_gui0C) })
             vim.api.nvim_set_hl(0, "HopNextKey1", { fg = W(vim.g.base16_gui0C) })
             vim.api.nvim_set_hl(0, "HopNextKey2", { fg = W(vim.g.base16_gui0D) })
