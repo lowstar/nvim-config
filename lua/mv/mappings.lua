@@ -42,18 +42,13 @@ vim.keymap.set("n", "<leader>pv", ":Ex<cr>")
 -- Telescope
 vim.keymap.set("n", "<leader>O", function()
     return require("telescope.builtin").find_files({ hidden = true })
-end, { noremap = true, silent = true })
+end)
 
-vim.keymap.set("n", "<leader>b", require("telescope.builtin").buffers, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>g", require("telescope.builtin").live_grep, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>G", require("telescope.builtin").git_files, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>v", require("mv.telescope").files_config_nvim, { noremap = true, silent = true })
-vim.keymap.set(
-    "n",
-    "<leader>f",
-    require("telescope").extensions.file_browser.file_browser,
-    { noremap = true, silent = true }
-)
+vim.keymap.set("n", "<leader>b", require("telescope.builtin").buffers)
+vim.keymap.set("n", "<leader>g", require("telescope.builtin").live_grep)
+vim.keymap.set("n", "<leader>G", require("telescope.builtin").git_files)
+vim.keymap.set("n", "<leader>v", require("mv.telescope").files_config_nvim)
+vim.keymap.set("n", "<leader>f", require("telescope").extensions.file_browser.file_browser)
 
 -- Hop
 vim.keymap.set("n", "<leader>j", require("hop").hint_words, { noremap = true, silent = true })
