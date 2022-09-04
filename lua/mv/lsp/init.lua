@@ -188,7 +188,7 @@ rust_tools.setup({
     server = {
         on_attach = function(client, bufnr)
             custom_attach(client, bufnr)
-            vim.keymap.set("v", "K", rust_tools.hover_range.hover_range, { buffer = bufnr })
+            vim.keymap.set("v", "<leader>k", rust_tools.hover_range.hover_range, { buffer = bufnr })
         end,
         settings = {
             ["rust-analyzer"] = {

@@ -1,6 +1,10 @@
 vim.keymap.set("i", "<C-j>", "<Esc>", { noremap = true })
 vim.keymap.set("v", "<C-j>", "<Esc>", { noremap = true })
 
+-- Move visual block up or down
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { noremap = true })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { noremap = true })
+
 -- Better window navigation
 vim.keymap.set("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
