@@ -46,6 +46,10 @@ vim.g.mapleader = ','
 vim.o.mouse = 'a'
 vim.o.winbar = '%=%m %f'
 
+vim.g.netrw_browse_split = 0
+vim.g.netrw_banner = 0
+vim.g.netrw_winsize = 25
+
 if vim.fn.executable('rg') then
     vim.o.grepprg = 'rg\\ --no-heading\\ --vimgrep'
     vim.o.grepformat = '%f:%l:%c:%m'

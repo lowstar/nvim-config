@@ -36,6 +36,9 @@ vim.keymap.set("c", "<c-e>", "<end>", { noremap = true })
 vim.keymap.set("n", "<leader>.", ":bn<cr>", { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>,", ":bp<cr>", { noremap = true, silent = true })
 
+-- Ex
+vim.keymap.set("n", "<leader>pv", ":Ex<cr>")
+
 -- Telescope
 vim.keymap.set("n", "<leader>O", function()
     return require("telescope.builtin").find_files({ hidden = true })
