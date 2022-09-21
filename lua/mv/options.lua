@@ -42,23 +42,24 @@ vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#folderexp()"
 vim.o.termguicolors = true
 vim.o.undofile = true
-vim.o.mouse = 'a'
-vim.o.winbar = '%=%m %f'
 vim.g.mapleader = " "
+vim.o.mouse = "a"
+vim.o.winbar = "%=%m %f"
 
 vim.g.netrw_browse_split = 0
-vim.g.netrw_banner = 0
+-- vim.g.netrw_banner = 0
 vim.g.netrw_winsize = 25
 
-if vim.fn.executable('rg') then
-    vim.o.grepprg = 'rg\\ --no-heading\\ --vimgrep'
-    vim.o.grepformat = '%f:%l:%c:%m'
+if vim.fn.executable("rg") then
+    vim.o.grepprg = "rg\\ --no-heading\\ --vimgrep"
+    vim.o.grepformat = "%f:%l:%c:%m"
 end
 
-vim.cmd [[
+vim.cmd([[
     autocmd BufRead * autocmd FileType <buffer> ++once
       \ if &ft !~# 'commit\|rebase' && line("'\"") > 1 && line("'\"") <= line("$") | exe 'normal! g`"' | endif
-]]
+]])
+
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = vim.api.nvim_create_augroup("HighlighYank", { clear = true }),
     pattern = "*",
