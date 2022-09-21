@@ -1,35 +1,44 @@
-local W = require("mv.utils").W
+local lsp_status = require("lsp-status")
 
-local my_lualine = {
-    inactive = {
-        a = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui03), gui = "bold" },
-        z = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui03), gui = "bold" },
-    },
-    normal = {
-        a = { fg = W(vim.g.base16_gui00), bg = W(vim.g.base16_gui0D), gui = "bold" },
-        b = { fg = W(vim.g.base16_gui04), bg = W(vim.g.base16_gui02) },
-        c = { fg = W(vim.g.base16_gui03), bg = W(vim.g.base16_gui01) },
-        x = { fg = W(vim.g.base16_gui04), bg = W(vim.g.base16_gui02) },
-        y = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui03), gui = "bold" },
-        z = { fg = W(vim.g.base16_gui00), bg = W(vim.g.base16_gui0D), gui = "bold" },
-    },
-    visual = {
-        a = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui0E), gui = "bold" },
-        z = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui0E), gui = "bold" },
-    },
-    replace = {
-        a = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui09), gui = "bold" },
-        z = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui09), gui = "bold" },
-    },
-    insert = {
-        a = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui0B), gui = "bold" },
-        z = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui0B), gui = "bold" },
-    },
-    command = {
-        a = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui08), gui = "bold" },
-        z = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui08), gui = "bold" },
-    },
-}
+local function lualine_theme()
+    if vim.g.colors_name == "tokyonight" then
+        return "tokyonight"
+    elseif vim.g.colors_name == "catppuccin" then
+        return "catppuccin"
+    else
+        local W = require("mv.utils").W
+        return {
+            inactive = {
+                a = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui03), gui = "bold" },
+                z = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui03), gui = "bold" },
+            },
+            normal = {
+                a = { fg = W(vim.g.base16_gui00), bg = W(vim.g.base16_gui0D), gui = "bold" },
+                b = { fg = W(vim.g.base16_gui04), bg = W(vim.g.base16_gui02) },
+                c = { fg = W(vim.g.base16_gui03), bg = W(vim.g.base16_gui01) },
+                x = { fg = W(vim.g.base16_gui04), bg = W(vim.g.base16_gui02) },
+                y = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui03), gui = "bold" },
+                z = { fg = W(vim.g.base16_gui00), bg = W(vim.g.base16_gui0D), gui = "bold" },
+            },
+            visual = {
+                a = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui0E), gui = "bold" },
+                z = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui0E), gui = "bold" },
+            },
+            replace = {
+                a = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui09), gui = "bold" },
+                z = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui09), gui = "bold" },
+            },
+            insert = {
+                a = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui0B), gui = "bold" },
+                z = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui0B), gui = "bold" },
+            },
+            command = {
+                a = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui08), gui = "bold" },
+                z = { fg = W(vim.g.base16_gui02), bg = W(vim.g.base16_gui08), gui = "bold" },
+            },
+        }
+    end
+end
 
 local function get_lsp_clients()
     local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
@@ -45,7 +54,7 @@ local function get_lsp_clients()
             table.insert(tbl, client.name)
         end
     end
-    local res = table.concat(tbl, ",")
+    local res = "[" .. table.concat(tbl, ",") .. "]"
     return res
 end
 
@@ -54,7 +63,7 @@ local function my_lsp_status()
         return ""
     end
 
-    local content = require("lsp-status").status():match("^%s*(.-)%s*$")
+    local content = lsp_status.status():match("^%s*(.-)%s*$")
     if #content == 0 then
         return get_lsp_clients()
     end
@@ -77,7 +86,7 @@ local sections = {
 
 require("lualine").setup({
     options = {
-        theme = my_lualine,
+        theme = lualine_theme(),
         section_separators = { "", "" },
         component_separators = { "|", "|" },
         globalstatus = true,

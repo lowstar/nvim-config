@@ -1,40 +1,44 @@
-local W = require("mv.utils").W
-
 vim.api.nvim_create_autocmd("ColorScheme", {
     callback = function()
-        vim.api.nvim_set_hl(0, "FloatBorder", { link = "NormalFloat" })
-        vim.api.nvim_set_hl(0, "ExtraWhiteSpace", { link = "ErrorMsg" })
-        vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { link = "Comment" })
-        vim.api.nvim_set_hl(0, "LspDiagnosticsDefaultError", { link = "DiagnosticError" })
-        vim.api.nvim_set_hl(0, "LspDiagnosticsDefaultWarning", { link = "DiagnosticWarn" })
-        vim.api.nvim_set_hl(0, "LspDiagnosticsDefaultInformation", { link = "DiagnosticInfo" })
-        vim.api.nvim_set_hl(0, "LspDiagnosticsDefaultHint", { link = "DiagnosticHint" })
-        vim.api.nvim_set_hl(0, "LspDiagnosticsSignError", { link = "LspDiagnosticsDefaultError" })
-        vim.api.nvim_set_hl(0, "LspDiagnosticsSignWarning", { link = "LspDiagnosticsDefaultWarning" })
-        vim.api.nvim_set_hl(0, "LspDiagnosticsSignInformation", { link = "LspDiagnosticsDefaultInformation" })
-        vim.api.nvim_set_hl(0, "LspDiagnosticsSignHint", { link = "LspDiagnosticsDefaultHint" })
-        vim.api.nvim_set_hl(0, "NotifyERRORBorder", { link = "DiagnosticError" })
-        vim.api.nvim_set_hl(0, "NotifyERRORIcon", { link = "NotifyERRORBorder" })
-        vim.api.nvim_set_hl(0, "NotifyERRORTitle", { link = "NotifyERRORBorder" })
-        vim.api.nvim_set_hl(0, "NotifyWARNBorder", { link = "DiagnosticWarn" })
-        vim.api.nvim_set_hl(0, "NotifyWARNIcon", { link = "NotifyWARNBorder" })
-        vim.api.nvim_set_hl(0, "NotifyWARNTitle", { link = "NotifyWARNBorder" })
-        vim.api.nvim_set_hl(0, "NotifyINFOBorder", { link = "DiagnosticInfo" })
-        vim.api.nvim_set_hl(0, "NotifyINFOIcon", { link = "NotifyINFOBorder" })
-        vim.api.nvim_set_hl(0, "NotifyINFOTitle", { link = "NotifyINFOBorder" })
-        vim.api.nvim_set_hl(0, "NotifyDEBUGBorder", { link = "DiagnosticHint" })
-        vim.api.nvim_set_hl(0, "NotifyDEBUGIcon", { link = "NotifyDEBUGBorder" })
-        vim.api.nvim_set_hl(0, "NotifyDEBUGTitle", { link = "NotifyDEBUGBorder" })
-        vim.api.nvim_set_hl(0, "NotifyTRACEBorder", { link = "DiagnosticHint" })
-        vim.api.nvim_set_hl(0, "NotifyTRACEIcon", { link = "NotifyTRACEBorder" })
-        vim.api.nvim_set_hl(0, "NotifyTRACETitle", { link = "NotifyTRACEBorder" })
-        vim.api.nvim_set_hl(0, "TSNodeKey", { link = "HopNextKey" })
-        vim.api.nvim_set_hl(0, "TSNodeUnmatched", { link = "HopUnmatched" })
-        vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { link = "CmpItemAbbrMatch" })
-
         if vim.g.colors_name:find("^base16") ~= nil then
-            vim.api.nvim_set_hl(0, "InlayHint", { fg = W(vim.g.base16_gui04), bg = W(vim.g.base16_gui01), italic = true })
+            vim.api.nvim_set_hl(0, "FloatBorder", { link = "NormalFloat" })
+            vim.api.nvim_set_hl(0, "GitSignsCurrentLineBlame", { link = "Comment" })
+            vim.api.nvim_set_hl(0, "LspDiagnosticsDefaultError", { link = "DiagnosticError" })
+            vim.api.nvim_set_hl(0, "LspDiagnosticsDefaultWarning", { link = "DiagnosticWarn" })
+            vim.api.nvim_set_hl(0, "LspDiagnosticsDefaultInformation", { link = "DiagnosticInfo" })
+            vim.api.nvim_set_hl(0, "LspDiagnosticsDefaultHint", { link = "DiagnosticHint" })
+            vim.api.nvim_set_hl(0, "LspDiagnosticsSignError", { link = "LspDiagnosticsDefaultError" })
+            vim.api.nvim_set_hl(0, "LspDiagnosticsSignWarning", { link = "LspDiagnosticsDefaultWarning" })
+            vim.api.nvim_set_hl(0, "LspDiagnosticsSignInformation", { link = "LspDiagnosticsDefaultInformation" })
+            vim.api.nvim_set_hl(0, "LspDiagnosticsSignHint", { link = "LspDiagnosticsDefaultHint" })
+            vim.api.nvim_set_hl(0, "NotifyERRORBorder", { link = "DiagnosticError" })
+            vim.api.nvim_set_hl(0, "NotifyERRORIcon", { link = "NotifyERRORBorder" })
+            vim.api.nvim_set_hl(0, "NotifyERRORTitle", { link = "NotifyERRORBorder" })
+            vim.api.nvim_set_hl(0, "NotifyWARNBorder", { link = "DiagnosticWarn" })
+            vim.api.nvim_set_hl(0, "NotifyWARNIcon", { link = "NotifyWARNBorder" })
+            vim.api.nvim_set_hl(0, "NotifyWARNTitle", { link = "NotifyWARNBorder" })
+            vim.api.nvim_set_hl(0, "NotifyINFOBorder", { link = "DiagnosticInfo" })
+            vim.api.nvim_set_hl(0, "NotifyINFOIcon", { link = "NotifyINFOBorder" })
+            vim.api.nvim_set_hl(0, "NotifyINFOTitle", { link = "NotifyINFOBorder" })
+            vim.api.nvim_set_hl(0, "NotifyDEBUGBorder", { link = "DiagnosticHint" })
+            vim.api.nvim_set_hl(0, "NotifyDEBUGIcon", { link = "NotifyDEBUGBorder" })
+            vim.api.nvim_set_hl(0, "NotifyDEBUGTitle", { link = "NotifyDEBUGBorder" })
+            vim.api.nvim_set_hl(0, "NotifyTRACEBorder", { link = "DiagnosticHint" })
+            vim.api.nvim_set_hl(0, "NotifyTRACEIcon", { link = "NotifyTRACEBorder" })
+            vim.api.nvim_set_hl(0, "NotifyTRACETitle", { link = "NotifyTRACEBorder" })
+            vim.api.nvim_set_hl(0, "TSNodeKey", { link = "HopNextKey" })
+            vim.api.nvim_set_hl(0, "TSNodeUnmatched", { link = "HopUnmatched" })
+            vim.api.nvim_set_hl(0, "CmpItemAbbrMatchFuzzy", { link = "CmpItemAbbrMatch" })
 
+            local W = require("mv.utils").W
+
+            vim.api.nvim_set_hl(
+                0,
+                "LspInlayHint",
+                { fg = W(vim.g.base16_gui04), bg = W(vim.g.base16_gui01), italic = true }
+            )
+
+            vim.api.nvim_set_hl(0, "ExtraWhiteSpace", { fg = W(vim.g.base16_gui08), bg = W(vim.g.base16_gui08) })
             vim.api.nvim_set_hl(0, "Whitespace", { fg = W(vim.g.base16_gui02), italic = true })
             vim.api.nvim_set_hl(0, "NonText", { fg = W(vim.g.base16_gui02), italic = true })
             vim.api.nvim_set_hl(0, "HopNextKey", { fg = W(vim.g.base16_gui0C) })
@@ -66,11 +70,52 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     end,
 })
 
+local colorscheme = "base16-tomorrow-night"
+
+if vim.env.ITERM_PROFILE == "eighties" then
+    colorscheme = "base16-tomorrow-night-eighties"
+elseif vim.env.ITERM_PROFILE == "tokyo" then
+    colorscheme = "tokyonight"
+elseif vim.env.ITERM_PROFILE == "catppuccin" then
+    colorscheme = "catppuccin"
+end
+
+if colorscheme == "tokyonight" then
+    require("tokyonight").setup({
+        style = "night",
+
+        on_colors = function(c)
+            c.border = c.border_highlight
+        end,
+
+        on_highlights = function(hl, c)
+            hl.NonText = {
+                fg = c.fg_gutter,
+            }
+            hl.ExtraWhiteSpace = {
+                bg = c.red,
+                fg = c.red,
+            }
+            hl.LspInlayHint = {
+                bg = c.bg_highlight,
+                italic = true,
+            }
+        end,
+    })
+    colorscheme = "tokyonight"
+elseif colorscheme == "catppuccin" then
+    vim.g.catppuccin_flavour = "mocha"
+    local colors = require("catppuccin.palettes").get_palette()
+    require("catppuccin").setup({
+        custom_highlights = {
+            LspInlayHint = { fg = colors.subtext0, bg = colors.surface0, style = { "italic" } },
+            ExtraWhiteSpace = { fg = colors.red, bg = colors.red },
+            NonText = { fg = colors.surface1 },
+            Whitespace = { fg = colors.surface1 },
+            Comment = { fg = colors.overlay1 },
+        },
+    })
+end
+
 vim.o.background = "dark"
-vim.cmd("colorscheme base16-tomorrow-night-eighties")
-
-vim.o.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
-
--- vim.o.guicursor = 'n-v-c-sm:block-blinkwait175-blinkoff150-blinkon175,' ..
---                       'i-ci-ve:ver25-blinkwait175-blinkoff150-blinkon175,' ..
---                       'r-cr-o:hor20-blinkwait175-blinkoff150-blinkon175'
+vim.cmd("colorscheme " .. colorscheme)
