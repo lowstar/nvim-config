@@ -119,15 +119,6 @@ function M.lsp_references()
     })
 end
 
-function M.lsp_document_diagnostics()
-    require("telescope.builtin").lsp_document_diagnostics({
-        layout_strategy = "vertical",
-        layout_config = { prompt_position = "top" },
-        sorting_strategy = "ascending",
-        ignore_filename = false,
-    })
-end
-
 function M.lsp_document_symbols()
     require("telescope.builtin").lsp_document_symbols({
         layout_strategy = "vertical",
