@@ -21,18 +21,9 @@ require("packer").init({
 return require("packer").startup(function(use)
     use("wbthomason/packer.nvim")
 
-    use("nanotee/nvim-lua-guide")
-
-    -- use("chriskempson/base16-vim")
     use("base16-project/base16-vim")
-
-    use({
-        "airblade/vim-rooter",
-        disable = true,
-        config = function()
-            vim.g.rooter_patterns = { ".git", "Makefile", "package.json", "Cargo.toml", "pom.xml" }
-        end,
-    })
+    use("folke/tokyonight.nvim")
+    use({ "catppuccin/nvim", as = "catppuccin" })
 
     use("ryanoasis/vim-devicons")
     use("kyazdani42/nvim-web-devicons")
@@ -43,7 +34,10 @@ return require("packer").startup(function(use)
     use("nvim-lua/plenary.nvim")
     use("nvim-telescope/telescope.nvim")
 
-    use({ "nvim-telescope/telescope-fzf-native.nvim", run = (vim.fn.has("bsd") > 0 and "gmake" or "make") })
+    use({
+        "nvim-telescope/telescope-fzf-native.nvim",
+        run = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
+    })
 
     use("nvim-telescope/telescope-symbols.nvim")
     use("nvim-telescope/telescope-hop.nvim")
@@ -70,6 +64,7 @@ return require("packer").startup(function(use)
         "hrsh7th/nvim-cmp",
         requires = {
             "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-nvim-lsp-signature-help",
             "hrsh7th/cmp-nvim-lua",
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
@@ -82,8 +77,7 @@ return require("packer").startup(function(use)
 
     use({ "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" })
 
-    -- use("tpope/vim-fugitive")
-    -- use("tpope/vim-surround")
+    use("tpope/vim-fugitive")
     use("machakann/vim-sandwich")
     use("windwp/nvim-autopairs")
     use("tommcdo/vim-exchange")
@@ -113,15 +107,9 @@ return require("packer").startup(function(use)
         end,
     })
 
-    -- use 'mhinz/vim-startify'
     use({ "dstein64/vim-startuptime", cmd = "StartupTime" })
 
     use("rcarriga/nvim-notify")
-
-    -- use({
-    --     "kyazdani42/nvim-tree.lua",
-    --     requires = "kyazdani42/nvim-web-devicons",
-    -- })
 
     use("dhruvasagar/vim-table-mode")
 
