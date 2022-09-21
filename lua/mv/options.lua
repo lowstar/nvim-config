@@ -42,9 +42,9 @@ vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#folderexp()"
 vim.o.termguicolors = true
 vim.o.undofile = true
-vim.g.mapleader = ','
 vim.o.mouse = 'a'
 vim.o.winbar = '%=%m %f'
+vim.g.mapleader = " "
 
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
