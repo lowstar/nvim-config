@@ -25,7 +25,6 @@ return require("packer").startup(function(use)
 
     -- use("chriskempson/base16-vim")
     use("base16-project/base16-vim")
-    use("machakann/vim-highlightedyank")
 
     use({
         "airblade/vim-rooter",
