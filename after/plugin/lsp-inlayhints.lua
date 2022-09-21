@@ -13,15 +13,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
         local bufnr = args.buf
         local client = vim.lsp.get_client_by_id(args.data.client_id)
-        require("lsp-inlayhints").on_attach(client, bufnr)
+        hints.on_attach(client, bufnr)
     end,
 })
 
 hints.setup({
     inlay_hints = {
         parameter_hints = {
-            show = true,
+            show = false,
         },
-        highlight = "InlayHint",
     },
 })

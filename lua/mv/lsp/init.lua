@@ -6,7 +6,13 @@ local null_ls = require("null-ls")
 
 lspkind.init({ mode = "symbol_text" })
 
-lsp_status.config({ indicator_separator = "", component_separator = " ", status_symbol = "", diagnostics = false })
+lsp_status.config({
+    indicator_separator = "",
+    component_separator = " ",
+    status_symbol = "",
+    diagnostics = false,
+    current_function = false,
+})
 lsp_status.register_progress()
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
@@ -31,7 +37,9 @@ vim.fn.sign_define("DiagnosticSignHint", { texthl = "DiagnosticSignHint", text =
 local function custom_attach(client, bufnr)
     lsp_status.on_attach(client)
 
-    vim.api.nvim_buf_set_option(0, "omnifunc", "v:lua.vim.lsp.omnifunc")
+    vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr")
+    vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+    vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
 
     if client.supports_method("textDocument/formatting") then
         vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { buffer = bufnr })
@@ -50,29 +58,20 @@ local function custom_attach(client, bufnr)
     vim.keymap.set("n", "<leader>lr", vim.lsp.codelens.run, { buffer = bufnr })
     vim.keymap.set("n", "<leader>ls", require("mv.telescope").lsp_document_symbols, { buffer = bufnr })
     vim.keymap.set("n", "<leader>lS", require("mv.telescope").lsp_workspace_symbols, { buffer = bufnr })
-    vim.keymap.set("n", "<leader>ld", function()
+    vim.keymap.set("n", "<leader>d", function()
         vim.diagnostic.open_float(0, { scope = "line" })
     end, {
         buffer = bufnr,
     })
 
-    vim.api.nvim_create_autocmd({ "CursorHold" }, {
-        buffer = 0,
-        group = vim.api.nvim_create_augroup("lsp_diagnostic", { clear = true }),
-        callback = vim.diagnostic.open_float,
-    })
-
     vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, { buffer = bufnr })
 
     if client.server_capabilities.codeLensProvider then
-        vim.api.nvim_create_autocmd(
-            { "BufEnter", "CursorHold", "InsertLeave" },
-            {
-                buffer = 0,
-                group = vim.api.nvim_create_augroup("lsp_codelens", { clear = true }),
-                callback = vim.lsp.codelens.refresh,
-            }
-        )
+        vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+            buffer = 0,
+            group = vim.api.nvim_create_augroup("lsp_codelens", { clear = true }),
+            callback = vim.lsp.codelens.refresh,
+        })
     end
 end
 
@@ -182,11 +181,12 @@ rust_tools.setup({
     tools = {
         inlay_hints = {
             auto = false,
-            highlight = "InlayHint",
+            highlight = "LspInlayHint",
         },
         hover_actions = { auto_focus = true },
     },
     server = {
+        capabilities = updated_capabilities,
         on_attach = function(client, bufnr)
             custom_attach(client, bufnr)
             vim.keymap.set("v", "<leader>k", rust_tools.hover_range.hover_range, { buffer = bufnr })
