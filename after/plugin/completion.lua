@@ -13,7 +13,7 @@ cmp.setup({
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-Space>"] = cmp.mapping.complete(),
-        ["<CR>"] = cmp.mapping.confirm({ select = false }),
+        ["<CR>"] = cmp.mapping.confirm({ select = true }),
         ["<Tab>"] = cmp.config.disable,
         ["<S-Tab>"] = cmp.config.disable,
     }),
@@ -63,6 +63,7 @@ cmp.setup({
     sources = cmp.config.sources({
         { name = "nvim_lua" },
         { name = "nvim_lsp" },
+        { name = "nvim_lsp_signature_help" },
         { name = "path" },
         { name = "luasnip" },
         { name = "orgmode" },
