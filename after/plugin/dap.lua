@@ -1,16 +1,15 @@
-local status_ok, dap = pcall(require, "dap")
-if not status_ok then
+local dap_ok, dap = pcall(require, "dap")
+if not dap_ok then
     return
 end
 
-local dapui = require("dapui")
+local dapui_ok, dapui = pcall(require, "dapui")
 
 vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>dc", dap.continue, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>dx", dap.stop, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>ds", dap.step_over, { noremap = true, silent = true })
 vim.keymap.set("n", "<leader>di", dap.step_over, { noremap = true, silent = true })
-vim.keymap.set("n", "<leader>dd", dapui.toggle, { noremap = true, silent = true })
 
 
 dap.adapters.lldb = {
@@ -51,4 +50,8 @@ dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
 
 require("dap-go").setup()
-dapui.setup()
+
+if dapui_ok then
+    dapui.setup()
+    vim.keymap.set("n", "<leader>dd", dapui.toggle, { noremap = true, silent = true })
+end
