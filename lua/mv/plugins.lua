@@ -14,10 +14,7 @@ vim.cmd([[
 
 require("packer").init({
     display = {
-        open_fn = function()
-            return require("packer.util").float({ border = "single" })
-        end,
-        -- open_fn = "new [packer]",
+        open_fn = "new [packer]",
     },
 })
 
