@@ -119,6 +119,5 @@ return require("packer").startup(function(use)
     use("nvim-orgmode/orgmode")
 
     use("lvimuser/lsp-inlayhints.nvim")
-    use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
     use({ "ThePrimeagen/harpoon", requires = "nvim-lua/plenary.nvim" })
 end)
