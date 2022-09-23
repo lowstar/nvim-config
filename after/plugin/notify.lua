@@ -1,7 +1,7 @@
 local notify = require("notify")
 
 notify.setup({
-    stages = "static",
+    stages = "fade_in_slide_out",
     render = "minimal",
     timeout = 2000,
 })
