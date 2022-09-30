@@ -1,1 +1,10 @@
-require("treesitter-context").setup()
+require("treesitter-context").setup({
+    patterns = {
+        default = {
+            "class",
+            "function",
+            "method",
+        },
+    },
+    mode = "topline",
+})
