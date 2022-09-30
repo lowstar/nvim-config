@@ -1,9 +1,7 @@
 local luasnip = require("luasnip")
 
 luasnip.config.set_config({ history = true, updateevents = "TextChanged,TextChangedI" })
-require("luasnip.loaders.from_vscode").load({
-    paths = { "~/.local/share/nvim/site/pack/packer/start/friendly-snippets" },
-})
+require("luasnip.loaders.from_vscode").lazy_load()
 
 vim.keymap.set({ "i", "s" }, "<C-k>", function()
     if luasnip.expand_or_jumpable() then
