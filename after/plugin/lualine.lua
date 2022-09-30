@@ -1,9 +1,7 @@
 local lsp_status = require("lsp-status")
 
 local function lualine_theme()
-    if vim.g.colors_name == "tokyonight" then
-        return "tokyonight"
-    elseif vim.g.colors_name == "catppuccin" then
+    if vim.g.colors_name == "catppuccin" then
         return "catppuccin"
     else
         local W = require("mv.utils").W

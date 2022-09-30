@@ -70,52 +70,21 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     end,
 })
 
-local colorscheme = "base16-tomorrow-night"
-
-if vim.env.ITERM_PROFILE == "eighties" then
-    colorscheme = "base16-tomorrow-night-eighties"
-elseif vim.env.ITERM_PROFILE == "tokyo" then
-    colorscheme = "tokyonight"
-elseif vim.env.ITERM_PROFILE == "catppuccin" then
-    colorscheme = "catppuccin"
-end
-
-if colorscheme == "tokyonight" then
-    require("tokyonight").setup({
-        style = "night",
-
-        on_colors = function(c)
-            c.border = c.border_highlight
-        end,
-
-        on_highlights = function(hl, c)
-            hl.NonText = {
-                fg = c.fg_gutter,
-            }
-            hl.ExtraWhiteSpace = {
-                bg = c.red,
-                fg = c.red,
-            }
-            hl.LspInlayHint = {
-                bg = c.bg_highlight,
-                italic = true,
-            }
-        end,
-    })
-    colorscheme = "tokyonight"
-elseif colorscheme == "catppuccin" then
-    vim.g.catppuccin_flavour = "mocha"
-    local colors = require("catppuccin.palettes").get_palette()
-    require("catppuccin").setup({
-        custom_highlights = {
-            LspInlayHint = { fg = colors.subtext0, bg = colors.surface0, style = { "italic" } },
-            ExtraWhiteSpace = { fg = colors.red, bg = colors.red },
-            NonText = { fg = colors.surface1 },
-            Whitespace = { fg = colors.surface1 },
-            Comment = { fg = colors.overlay1 },
-        },
-    })
-end
+vim.g.catppuccin_flavour = "macchiato"
+local colors = require("catppuccin.palettes").get_palette()
+require("catppuccin").setup({
+    integrations = {
+        lsp_trouble = true,
+        treesitter_context = true,
+    },
+    custom_highlights = {
+        LspInlayHint = { fg = colors.subtext0, bg = colors.surface0, style = { "italic" } },
+        ExtraWhiteSpace = { fg = colors.red, bg = colors.red },
+        NonText = { fg = colors.surface1 },
+        Whitespace = { fg = colors.surface1 },
+        Comment = { fg = colors.overlay1 },
+    },
+})
 
 vim.o.background = "dark"
-vim.cmd("colorscheme " .. colorscheme)
+vim.cmd("colorscheme catppuccin")

@@ -22,7 +22,6 @@ return require("packer").startup(function(use)
     use("wbthomason/packer.nvim")
 
     use("base16-project/base16-vim")
-    use("folke/tokyonight.nvim")
     use({ "catppuccin/nvim", as = "catppuccin" })
 
     use("ryanoasis/vim-devicons")
